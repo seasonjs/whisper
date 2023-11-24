@@ -258,7 +258,11 @@ type WhisperFullParamsRef struct {
 }
 
 type WhisperContextParams struct {
-	useGpu bool
+	UseGpu bool
+}
+
+func (p *WhisperContextParams) ToWhisperContextParamsRef() *WhisperContextParamsRef {
+	return &WhisperContextParamsRef{paramsRef: uintptr(unsafe.Pointer(p))}
 }
 
 type WhisperContextParamsRef struct {
@@ -445,16 +449,16 @@ type CWhisper interface {
 	// WhisperFull Run the entire model: PCM -> log mel spectrogram -> encoder -> decoder -> text
 	// Not thread safe for same context
 	// Uses the specified decoding strategy to obtain the text.
-	WhisperFull(ctx *WhisperContext, params WhisperFullParams, samples []float32, nSamples int) int
+	WhisperFull(ctx *WhisperContext, params *WhisperFullParamsRef, samples []float32, nSamples int) int
 
-	WhisperFullWithState(ctx *WhisperContext, state *WhisperState, params WhisperFullParams, samples []float32, nSamples int) int
+	WhisperFullWithState(ctx *WhisperContext, state *WhisperState, params *WhisperFullParamsRef, samples []float32, nSamples int) int
 
 	// WhisperFullParallel Split the input audio in chunks and process each chunk separately using whisper_full_with_state()
 	// Result is stored in the default state of the context
 	// Not thread safe if executed in parallel on the same context.
 	// It seems this approach can offer some speedup in some cases.
 	// However, the transcription accuracy can be worse at the beginning and end of each chunk.
-	WhisperFullParallel(ctx *WhisperContext, params WhisperFullParams, samples []float32, nSamples, nProcessors int) int
+	WhisperFullParallel(ctx *WhisperContext, params *WhisperFullParamsRef, samples []float32, nSamples, nProcessors int) int
 
 	// WhisperFullNSegments WhisperFullNSegmentsFromState Number of generated text segments
 	// A segment can be a few words, a sentence, or even a paragraph.
@@ -590,8 +594,8 @@ type CWhisperImpl struct {
 
 	cWhisperContextDefaultParamsByRef func() uintptr
 	cWhisperContextDefaultParams      func() uintptr
-	cWhisperFullDefaultParamsByRef    func(strategy uintptr) uintptr
-	cWhisperFullDefaultParams         func(strategy uintptr) uintptr
+	cWhisperFullDefaultParamsByRef    func(strategy int) uintptr
+	cWhisperFullDefaultParams         func(strategy int) uintptr
 
 	cWhisperFull          func(ctx uintptr, params uintptr, samples *float32, nSamples int) int
 	cWhisperFullWithState func(ctx uintptr, state uintptr, params uintptr, samples *float32, nSamples int) int
@@ -618,13 +622,13 @@ type CWhisperImpl struct {
 	cWhisperFullGetSegmentTextFromState func(ctx uintptr, state uintptr, iSegment int) string
 
 	cWhisperFullNTokens          func(ctx uintptr, iSegment int) int
-	cWhisperFullNTokensFromState func(ctx uintptr, state uintptr, iSegment int) int
+	cWhisperFullNTokensFromState func(state uintptr, iSegment int) int
 
 	cWhisperFullGetTokenText          func(ctx uintptr, iSegment, iToken int) string
 	cWhisperFullGetTokenTextFromState func(ctx uintptr, state uintptr, iSegment, iToken int) string
 
 	cWhisperFullGetTokenId          func(ctx uintptr, iSegment, iToken int) int
-	cWhisperFullGetTokenIdFromState func(ctx uintptr, state uintptr, iSegment, iToken int) int
+	cWhisperFullGetTokenIdFromState func(state uintptr, iSegment, iToken int) int
 
 	//TODO
 	//cWhisperFullGetTokenData          func()
@@ -725,8 +729,8 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 
 		whisperContextDefaultParamsByRef func() uintptr
 		whisperContextDefaultParams      func() uintptr
-		whisperFullDefaultParamsByRef    func(strategy uintptr) uintptr
-		whisperFullDefaultParams         func(strategy uintptr) uintptr
+		whisperFullDefaultParamsByRef    func(strategy int) uintptr
+		whisperFullDefaultParams         func(strategy int) uintptr
 
 		whisperFull          func(ctx uintptr, params uintptr, samples *float32, nSamples int) int
 		whisperFullWithState func(ctx uintptr, state uintptr, params uintptr, samples *float32, nSamples int) int
@@ -753,15 +757,14 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 		whisperFullGetSegmentTextFromState func(ctx uintptr, state uintptr, iSegment int) string
 
 		whisperFullNTokens          func(ctx uintptr, iSegment int) int
-		whisperFullNTokensFromState func(ctx uintptr, state uintptr, iSegment int) int
+		whisperFullNTokensFromState func(state uintptr, iSegment int) int
 
 		whisperFullGetTokenText          func(ctx uintptr, iSegment, iToken int) string
 		whisperFullGetTokenTextFromState func(ctx uintptr, state uintptr, iSegment, iToken int) string
 
 		whisperFullGetTokenId          func(ctx uintptr, iSegment, iToken int) int
-		whisperFullGetTokenIdFromState func(ctx uintptr, state uintptr, iSegment, iToken int) int
+		whisperFullGetTokenIdFromState func(state uintptr, iSegment, iToken int) int
 
-		//TODO
 		//whisperFullGetTokenData          func()
 		//whisperFullGetTokenDataFromState func()
 
@@ -861,9 +864,6 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 
 	purego.RegisterLibFunc(&whisperFullParallel, libWhisper, cWhisperFullParallel)
 	purego.RegisterLibFunc(&whisperFullNSegments, libWhisper, cWhisperFullNSegments)
-
-	purego.RegisterLibFunc(&whisperFullDefaultParamsByRef, libWhisper, cWhisperFullDefaultParamsByRef)
-	purego.RegisterLibFunc(&whisperFullDefaultParams, libWhisper, cWhisperFullDefaultParams)
 
 	purego.RegisterLibFunc(&whisperFullNSegmentsFromState, libWhisper, cWhisperFullNSegmentsFromState)
 
@@ -1030,7 +1030,10 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 
 func (c *CWhisperImpl) WhisperInitFromFileWithParams(pathModel string, params *WhisperContextParamsRef) *WhisperContext {
 	ctx := c.cWhisperInitFromFileWithParams(pathModel, params.paramsRef)
-	return &WhisperContext{ctx: ctx}
+	if ctx != 0 {
+		return &WhisperContext{ctx: ctx}
+	}
+	return nil
 }
 
 func (c *CWhisperImpl) WhisperInitFromBufferWithParams(buffer []byte, params *WhisperContextParamsRef) *WhisperContext {
@@ -1295,232 +1298,237 @@ func (c *CWhisperImpl) WhisperModelType(ctx *WhisperContext) int {
 }
 
 func (c *CWhisperImpl) WhisperGetLogits(ctx *WhisperContext) []float32 {
-	// finish this binding
-	c.cWhisperGetLogits(ctx.ctx)
-	return []float32{}
+	//TODO finish this binding
+	panic("WhisperFullGetTokenDataFromState is not support now")
+	//c.cWhisperGetLogits(ctx.ctx)
+	//return []float32{}
 }
 
 func (c *CWhisperImpl) WhisperGetLogitsFromState(state *WhisperState) []float32 {
-	//TODO implement me
-	panic("implement me")
+	//TODO finish this binding
+	panic("WhisperFullGetTokenDataFromState is not support now")
+	//c.cWhisperGetLogitsFromState(state.state)
+	//return []float32{}
 }
 
 func (c *CWhisperImpl) WhisperTokenToStr(ctx *WhisperContext, token WhisperToken) string {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenToStr(ctx.ctx, int(token))
+	return result
 }
 
 func (c *CWhisperImpl) WhisperModelTypeReadable(ctx *WhisperContext) string {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperModelTypeReadable(ctx.ctx)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperTokenEot(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenEot(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenSot(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenSot(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenSolm(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenSolm(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenPrev(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenPrev(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenNosp(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenNosp(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenNot(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenNot(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenBeg(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenBeg(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenLang(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenLang(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenTranslate(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenTranslate(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperTokenTranscribe(ctx *WhisperContext) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperTokenTranscribe(ctx.ctx)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperPrintTimings(ctx *WhisperContext) {
-	//TODO implement me
-	panic("implement me")
+	c.cWhisperPrintTimings(ctx.ctx)
 }
 
 func (c *CWhisperImpl) WhisperResetTimings(ctx *WhisperContext) {
-	//TODO implement me
-	panic("implement me")
+	c.cWhisperResetTimings(ctx.ctx)
 }
 
 func (c *CWhisperImpl) WhisperPrintSystemInfo() string {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperPrintSystemInfo()
+	return result
 }
 
 func (c *CWhisperImpl) WhisperContextDefaultParamsByRef() *WhisperContextParamsRef {
-	//TODO implement me
-	panic("implement me")
+	paramsRef := c.cWhisperContextDefaultParamsByRef()
+	return &WhisperContextParamsRef{
+		paramsRef: paramsRef,
+	}
 }
 
 func (c *CWhisperImpl) WhisperContextDefaultParams() *WhisperContextParams {
-	//TODO implement me
-	panic("implement me")
+	params := c.cWhisperContextDefaultParams()
+	return (*WhisperContextParams)(unsafe.Pointer(params))
 }
 
 func (c *CWhisperImpl) WhisperFullDefaultParamsByRef(strategy WhisperSamplingStrategy) *WhisperFullParamsRef {
-	//TODO implement me
-	panic("implement me")
+	//i := int32(strategy)
+	//paramsRef := c.cWhisperFullDefaultParamsByRef(uintptr(unsafe.Pointer(&i)))
+	return &WhisperFullParamsRef{
+		paramsRef: 0,
+	}
 }
 
 func (c *CWhisperImpl) WhisperFullDefaultParams(strategy WhisperSamplingStrategy) *WhisperFullParams {
-	//TODO implement me
-	panic("implement me")
+	//i := int32(strategy)
+	//params := c.cWhisperFullDefaultParams(uintptr(unsafe.Pointer(&i)))
+	return &WhisperFullParams{}
 }
 
-func (c *CWhisperImpl) WhisperFull(ctx *WhisperContext, params WhisperFullParams, samples []float32, nSamples int) int {
-	//TODO implement me
-	panic("implement me")
+func (c *CWhisperImpl) WhisperFull(ctx *WhisperContext, params *WhisperFullParamsRef, samples []float32, nSamples int) int {
+	result := c.cWhisperFull(ctx.ctx, params.paramsRef, &samples[0], nSamples)
+	return result
 }
 
-func (c *CWhisperImpl) WhisperFullWithState(ctx *WhisperContext, state *WhisperState, params WhisperFullParams, samples []float32, nSamples int) int {
-	//TODO implement me
-	panic("implement me")
+func (c *CWhisperImpl) WhisperFullWithState(ctx *WhisperContext, state *WhisperState, params *WhisperFullParamsRef, samples []float32, nSamples int) int {
+	result := c.cWhisperFullWithState(ctx.ctx, state.state, params.paramsRef, &samples[0], nSamples)
+	return result
 }
 
-func (c *CWhisperImpl) WhisperFullParallel(ctx *WhisperContext, params WhisperFullParams, samples []float32, nSamples, nProcessors int) int {
-	//TODO implement me
-	panic("implement me")
+func (c *CWhisperImpl) WhisperFullParallel(ctx *WhisperContext, params *WhisperFullParamsRef, samples []float32, nSamples, nProcessors int) int {
+	result := c.cWhisperFullParallel(ctx.ctx, params.paramsRef, &samples[0], nSamples, nProcessors)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullNSegments(ctx *WhisperContext) int {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullNSegments(ctx.ctx)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullNSegmentsFromState(state *WhisperState) int {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullNSegmentsFromState(state.state)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullLangId(ctx *WhisperContext) int {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullNSegmentsFromState(ctx.ctx)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullLangIdFromState(state *WhisperState) int {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullLangIdFromState(state.state)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetSegmentT0(ctx *WhisperContext, iSegment int) int64 {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetSegmentT0(ctx.ctx, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetSegmentT0FromState(state *WhisperState, iSegment int) int64 {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetSegmentT0FromState(state.state, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetSegmentT1(ctx *WhisperContext, iSegment int) int64 {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetSegmentT1(ctx.ctx, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetSegmentT1FromState(state *WhisperState, iSegment int) int64 {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetSegmentT1FromState(state.state, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetSegmentSpeakerTurnNext(ctx *WhisperContext, iSegment int) bool {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetSegmentSpeakerTurnNext(ctx.ctx, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetSegmentSpeakerTurnNextFromState(state *WhisperState, iSegment int) bool {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetSegmentSpeakerTurnNextFromState(state.state, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetSegmentText(ctx *WhisperContext, iSegment int) string {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetSegmentText(ctx.ctx, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetSegmentTextFromState(state *WhisperState, iSegment int) string {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetSegmentText(state.state, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullNTokens(ctx *WhisperContext, iSegment int) int {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullNTokens(ctx.ctx, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullNTokensFromState(state *WhisperState, iSegment int) int {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullNTokensFromState(state.state, iSegment)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetTokenText(ctx *WhisperContext, iSegment, iToken int) string {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetTokenText(ctx.ctx, iSegment, iToken)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetTokenTextFromState(ctx *WhisperContext, state *WhisperState, iSegment, iToken int) string {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetTokenTextFromState(ctx.ctx, state.state, iSegment, iToken)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetTokenId(ctx *WhisperContext, iSegment, iToken int) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetTokenId(ctx.ctx, iSegment, iToken)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperFullGetTokenIdFromState(state *WhisperState, iSegment, iToken int) WhisperToken {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetTokenIdFromState(state.state, iSegment, iToken)
+	return WhisperToken(result)
 }
 
 func (c *CWhisperImpl) WhisperFullGetTokenData(ctx *WhisperContext, iSegment, iToken int) WhisperTokenData {
-	//TODO implement me
-	panic("implement me")
+	panic("WhisperFullGetTokenData is not support now")
 }
 
 func (c *CWhisperImpl) WhisperFullGetTokenDataFromState(state *WhisperState, iSegment, iToken int) WhisperTokenData {
-	//TODO implement me
-	panic("implement me")
+	panic("WhisperFullGetTokenDataFromState is not support now")
 }
 
 func (c *CWhisperImpl) WhisperFullGetTokenP(ctx *WhisperContext, iSegment, iToken int) float32 {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetTokenP(ctx.ctx, iSegment, iToken)
+	return result
 }
 
 func (c *CWhisperImpl) WhisperFullGetTokenPFromState(state *WhisperState, iSegment, iToken int) float32 {
-	//TODO implement me
-	panic("implement me")
+	result := c.cWhisperFullGetTokenPFromState(state.state, iSegment, iToken)
+	return result
 }

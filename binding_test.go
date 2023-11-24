@@ -2,7 +2,9 @@ package whisper
 
 import (
 	"fmt"
+	"golang.org/x/sys/windows"
 	"runtime"
+	"syscall"
 	"testing"
 	"unsafe"
 )
@@ -37,11 +39,36 @@ func TestNewCWhisper(t *testing.T) {
 	})
 
 	t.Run("Test Go enum to C enum", func(t *testing.T) {
-		var i = int32(WHISPER_SAMPLING_GREEDY)
-		fullPrt := whisper.cWhisperFullDefaultParams(uintptr(unsafe.Pointer(&i)))
+		var i = int(WHISPER_SAMPLING_GREEDY)
+		fullPrt := whisper.cWhisperFullDefaultParamsByRef(i)
 		t.Log(fullPrt)
 		params := (*WhisperFullParams)(unsafe.Pointer(fullPrt))
 		t.Log(params)
 	})
 
+	t.Run("Test C struct to Go uintptr then to Go struct", func(t *testing.T) {
+		// TODO why goland debug build pass but test build panic?
+		var i = int(WHISPER_SAMPLING_GREEDY)
+		fullPrt := whisper.cWhisperFullDefaultParams(i)
+		t.Log(fullPrt)
+	})
+
+}
+
+func TestNativeSysCall(t *testing.T) {
+	// TODO why goland debug build pass but test build panic?
+	handle, err := windows.LoadLibrary(getLibrary())
+	if err != nil {
+		return
+	}
+	address, err := windows.GetProcAddress(handle, cWhisperFullDefaultParams)
+	if err != nil {
+		return
+	}
+	var i = int(WHISPER_SAMPLING_GREEDY)
+	r1, r2, _ := syscall.SyscallN(address, uintptr(unsafe.Pointer(&i)))
+	//if err != nil {
+	//	t.Error(err)
+	//}
+	t.Log(r1, r2)
 }
