@@ -24,11 +24,12 @@ func getLibrary() string {
 func TestNewCWhisper(t *testing.T) {
 	whisper, err := NewCWhisper(getLibrary())
 	if err != nil {
+		t.Error(err)
 		return
 	}
 	t.Run("Test C struct to Go struct", func(t *testing.T) {
 		pointer := whisper.cWhisperContextDefaultParams()
-		params := (*WhisperContextParams)(unsafe.Pointer(pointer))
+		params := (*CWhisperContextParams)(unsafe.Pointer(pointer))
 		t.Log(params)
 	})
 
@@ -42,7 +43,7 @@ func TestNewCWhisper(t *testing.T) {
 		var i = int(WHISPER_SAMPLING_GREEDY)
 		fullPrt := whisper.cWhisperFullDefaultParamsByRef(i)
 		t.Log(fullPrt)
-		params := (*WhisperFullParams)(unsafe.Pointer(fullPrt))
+		params := (*CWhisperFullParams)(unsafe.Pointer(fullPrt))
 		t.Log(params)
 	})
 
@@ -59,6 +60,7 @@ func TestNativeSysCall(t *testing.T) {
 	// TODO why goland debug build pass but test build panic?
 	handle, err := windows.LoadLibrary(getLibrary())
 	if err != nil {
+		t.Error(err)
 		return
 	}
 	address, err := windows.GetProcAddress(handle, cWhisperFullDefaultParams)
@@ -66,7 +68,7 @@ func TestNativeSysCall(t *testing.T) {
 		return
 	}
 	var i = int(WHISPER_SAMPLING_GREEDY)
-	r1, r2, _ := syscall.SyscallN(address, uintptr(unsafe.Pointer(&i)))
+	r1, r2, _ := syscall.SyscallN(address, uintptr(i))
 	//if err != nil {
 	//	t.Error(err)
 	//}
