@@ -1,25 +1,10 @@
 package whisper_test
 
 import (
-	"fmt"
 	"os"
-	"runtime"
 	"testing"
 	"whisper"
 )
-
-func getLibrary() string {
-	switch runtime.GOOS {
-	//case "darwin":
-	//	return "./deps/darwin/librwkv_arm64.dylib"
-	//case "linux":
-	//	return "./deps/linux/librwkv.so"
-	case "windows":
-		return "./deps/windows/whisper.dll"
-	default:
-		panic(fmt.Errorf("GOOS=%s is not supported", runtime.GOOS))
-	}
-}
 
 func TestWhisper(t *testing.T) {
 	model, err := whisper.NewWhisperModel(getLibrary(), whisper.WhisperOptions{

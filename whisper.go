@@ -20,6 +20,7 @@ type WhisperModel struct {
 	ctx        *CWhisperContext
 	options    *WhisperOptions
 	isAutoLoad bool
+	fullParams *CWhisperFullParamsRef
 }
 
 func NewWhisperModel(dylibPath string, options WhisperOptions) (*WhisperModel, error) {
@@ -27,17 +28,18 @@ func NewWhisperModel(dylibPath string, options WhisperOptions) (*WhisperModel, e
 	if err != nil {
 		return nil, err
 	}
-
+	fullParams := cWhisper.WhisperFullDefaultParamsByRef(WHISPER_SAMPLING_GREEDY)
 	return &WhisperModel{
-		cWhisper:  cWhisper,
-		dylibPath: dylibPath,
-		options:   &options,
+		cWhisper:   cWhisper,
+		dylibPath:  dylibPath,
+		options:    &options,
+		fullParams: fullParams,
 	}, nil
 }
 
 func (m *WhisperModel) LoadFromFile(path string) error {
-	params := CWhisperContextParams{UseGpu: m.options.GpuEnable}
-	ctx := m.cWhisper.WhisperInitFromFileWithParamsNoState(path, params.ToWhisperContextParamsRef())
+	params := m.cWhisper.WhisperContextDefaultParamsByRef()
+	ctx := m.cWhisper.WhisperInitFromFileWithParamsRef(path, params)
 	if ctx == nil {
 		return errors.New("LoadFormFile Error, can't get CWhisperContext")
 	}
@@ -64,7 +66,6 @@ func (m *WhisperModel) Predict(reader io.ReadSeeker) (string, error) {
 		return "", errors.New("CWhisperContext is nil")
 	}
 
-	params := m.cWhisper.WhisperFullDefaultParamsByRef(WHISPER_SAMPLING_GREEDY)
 	dec := wav.NewDecoder(reader)
 	buf, err := dec.FullPCMBuffer()
 	if err != nil {
@@ -79,14 +80,8 @@ func (m *WhisperModel) Predict(reader io.ReadSeeker) (string, error) {
 
 	data := buf.AsFloat32Buffer().Data
 
-	if m.options.NProcessors > 0 {
-		if m.cWhisper.WhisperFullParallel(m.ctx, params, data, len(data), m.options.NProcessors) != 0 {
-			return "", errors.New("WhisperFullParallel Error,failed to process audio")
-		}
-	} else {
-		if m.cWhisper.WhisperFull(m.ctx, params, data, len(data)) != 0 {
-			return "", errors.New("WhisperFull Error, failed to process audio")
-		}
+	if m.cWhisper.WhisperFullRefParallel(m.ctx, m.fullParams, data, len(data), m.options.NProcessors) != 0 {
+		return "", errors.New("WhisperFullParallel Error,failed to process audio")
 	}
 
 	result := ""

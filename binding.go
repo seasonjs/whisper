@@ -16,13 +16,14 @@ const (
 )
 
 const (
-	cWhisperInitFromFileWithParams   = "whisper_init_from_file_with_params"
-	cWhisperInitFromBufferWithParams = "whisper_init_from_buffer_with_params"
-	cWhisperInitWithParams           = "whisper_init_with_params"
-
-	cWhisperInitFromFileWithParamsNoState   = "whisper_init_from_file_with_params_no_state"
-	cWhisperInitFromBufferWithParamsNoState = "whisper_init_from_buffer_with_params_no_state"
-	cWhisperInitWithParamsNoState           = "whisper_init_with_params_no_state"
+	//=============================================whisper.h============================================================
+	//cWhisperInitFromFileWithParams   = "whisper_init_from_file_with_params"
+	//cWhisperInitFromBufferWithParams = "whisper_init_from_buffer_with_params"
+	//cWhisperInitWithParams           = "whisper_init_with_params"
+	//
+	//cWhisperInitFromFileWithParamsNoState   = "whisper_init_from_file_with_params_no_state"
+	//cWhisperInitFromBufferWithParamsNoState = "whisper_init_from_buffer_with_params_no_state"
+	//cWhisperInitWithParamsNoState           = "whisper_init_with_params_no_state"
 
 	cWhisperInitState              = "whisper_init_state"
 	cWhisperCtxInitOpenvinoEncoder = "whisper_ctx_init_openvino_encoder"
@@ -104,10 +105,10 @@ const (
 	cWhisperFullDefaultParamsByRef    = "whisper_full_default_params_by_ref"
 	cWhisperFullDefaultParams         = "whisper_full_default_params"
 
-	cWhisperFull          = "whisper_full"
-	cWhisperFullWithState = "whisper_full_with_state"
-
-	cWhisperFullParallel  = "whisper_full_parallel"
+	//cWhisperFull          = "whisper_full"
+	//cWhisperFullWithState = "whisper_full_with_state"
+	//
+	//cWhisperFullParallel  = "whisper_full_parallel"
 	cWhisperFullNSegments = "whisper_full_n_segments"
 
 	cWhisperFullNSegmentsFromState = "whisper_full_n_segments_from_state"
@@ -137,11 +138,76 @@ const (
 	cWhisperFullGetTokenId          = "whisper_full_get_token_id"
 	cWhisperFullGetTokenIdFromState = "whisper_full_get_token_id_from_state"
 
-	cWhisperFullGetTokenData          = "whisper_full_get_token_data"
-	cWhisperFullGetTokenDataFromState = "whisper_full_get_token_data_from_state"
+	//cWhisperFullGetTokenData          = "whisper_full_get_token_data"
+	//cWhisperFullGetTokenDataFromState = "whisper_full_get_token_data_from_state"
 
 	cWhisperFullGetTokenP          = "whisper_full_get_token_p"
 	cWhisperFullGetTokenPFromState = "whisper_full_get_token_p_from_state"
+
+	//=============================================whisper_abi.h========================================================
+
+	cWhisperContextParamsSetUseGpu = "whisper_context_params_set_use_gpu"
+
+	cWhisperFullParamsSetStrategy = "whisper_full_params_set_strategy"
+
+	cWhisperFullParamsSetNThreads    = "whisper_full_params_set_n_threads"
+	cWhisperFullParamsSetNMaxTextCtx = "whisper_full_params_set_n_max_text_ctx"
+	cWhisperFullParamsSetOffsetMs    = "whisper_full_params_set_offset_ms"
+	cWhisperFullParamsSetDurationMs  = "whisper_full_params_set_duration_ms"
+
+	cWhisperFullParamsSetTranslate       = "whisper_full_params_set_translate"
+	cWhisperFullParamsSetNoContext       = "whisper_full_params_set_no_context"
+	cWhisperFullParamsSetNoTimestamps    = "whisper_full_params_set_no_timestamps"
+	cWhisperFullParamsSetSingleSegment   = "whisper_full_params_set_single_segment"
+	cWhisperFullParamsSetPrintSpecial    = "whisper_full_params_set_print_special"
+	cWhisperFullParamsSetPrintProgress   = "whisper_full_params_set_print_progress"
+	cWhisperFullParamsSetPrintRealtime   = "whisper_full_params_set_print_realtime"
+	cWhisperFullParamsSetPrintTimestamps = "whisper_full_params_set_print_timestamps"
+
+	cWhisperFullParamsSetTokenTimestamps = "whisper_full_params_set_token_timestamps"
+	cWhisperFullParamsSetTholdPt         = "whisper_full_params_set_thold_pt"
+	cWhisperFullParamsSetTholdPtsum      = "whisper_full_params_set_thold_ptsum"
+	cWhisperFullParamsSetMaxLen          = "whisper_full_params_set_max_len"
+	cWhisperFullParamsSetSplitOnWord     = "whisper_full_params_set_split_on_word"
+	cWhisperFullParamsSetMaxTokens       = "whisper_full_params_set_max_tokens"
+
+	cWhisperFullParamsSetSpeedUp   = "whisper_full_params_set_speed_up"
+	cWhisperFullParamsSetDebugMode = "whisper_full_params_set_debug_mode"
+	cWhisperFullParamsSetAudioCtx  = "whisper_full_params_set_audio_ctx"
+
+	cWhisperFullParamsSetTdrzEnable = "whisper_full_params_set_tdrz_enable"
+
+	cWhisperFullParamsSetInitialPrompt = "whisper_full_params_set_initial_prompt"
+	cWhisperFullParamsSetPromptTokens  = "whisper_full_params_set_prompt_tokens"
+	cWhisperFullParamsSetPromptNTokens = "whisper_full_params_set_prompt_n_tokens"
+
+	cWhisperFullParamsSetLanguage       = "whisper_full_params_set_language"
+	cWhisperFullParamsSetDetectLanguage = "whisper_full_params_set_detect_language"
+
+	cWhisperFullParamsSetSuppressBlank           = "whisper_full_params_set_suppress_blank"
+	cWhisperFullParamsSetSuppressNonSpeechTokens = "whisper_full_params_set_suppress_non_speech_tokens"
+	cWhisperFullParamsSetTemperature             = "whisper_full_params_set_temperature"
+	cWhisperFullParamsSetMaxInitialTs            = "whisper_full_params_set_max_initial_ts"
+	cWhisperFullParamsSetLengthPenalty           = "whisper_full_params_set_length_penalty"
+
+	cWhisperFullParamsSetTemperatureInc = "whisper_full_params_set_temperature_inc"
+	cWhisperFullParamsSetEntropyThold   = "whisper_full_params_set_entropy_thold"
+	cWhisperFullParamsSetLogprobThold   = "whisper_full_params_set_logprob_thold"
+	cWhisperFullParamsSetNoSpeechThold  = "whisper_full_params_set_no_speech_thold"
+
+	cWhisperFullParamsSetGreedyBestOf       = "whisper_full_params_set_greedy_best_of"
+	cWhisperFullParamsSetBeamSearchBeamSize = "whisper_full_params_set_beam_search_beam_size"
+	cWhisperFullParamsSetBeamSearchPatience = "whisper_full_params_set_beam_search_patience"
+
+	cWhisperInitFromFileWithParamsRef   = "whisper_init_from_file_with_params_ref"
+	cWhisperInitFromBufferWithParamsRef = "whisper_init_from_buffer_with_params_ref"
+
+	cWhisperInitFromFileWithParamsRefNoState   = "whisper_init_from_file_with_params_ref_no_state"
+	cWhisperInitFromBufferWithParamsRefNoState = "whisper_init_from_buffer_with_params_ref_no_state"
+
+	cWhisperFullRef          = "whisper_full_ref"
+	cWhisperFullRefWithState = "whisper_full_ref_with_state"
+	cWhisperFullRefParallel  = "whisper_full_ref_parallel"
 )
 
 type CWhisperContext struct {
@@ -155,151 +221,152 @@ type CWhisperState struct {
 // CWhisperFullParams WhisperFullParams Parameters for the CWhisper.WhisperFull function
 // If you change the order or add new parameters, make sure to update the default values in whisper.cpp:
 // CWhisper.WhisperFullDefaultParams()
-// TODO: align memo
-type CWhisperFullParams struct {
-	strategy int32
-
-	nThreads    int32
-	nMaxTextCtx int32 // max tokens to use from past text as prompt for the decoder
-	offsetMs    int32 // start offset in ms
-	durationMs  int32 // audio duration to process in ms
-
-	translate       bool
-	noContext       bool // do not use past transcription (if any) as initial prompt for the decoder
-	noTimestamps    bool // do not generate timestamps
-	singleSegment   bool // force single segment output (useful for streaming)
-	printSpecial    bool // print special tokens (e.g. <SOT>, <EOT>, <BEG>, etc.)
-	printProgress   bool // print progress information
-	printRealtime   bool // print results from within whisper.cpp (avoid it, use callback instead)
-	printTimestamps bool // print timestamps for each text segment when printing realtime
-
-	// [EXPERIMENTAL] token-level timestamps
-	tokenTimestamps bool    // enable token-level timestamps
-	tholdPt         float32 // timestamp token probability threshold (~0.01)
-	tholdPtsum      float32 // timestamp token sum probability threshold (~0.01)
-	maxLen          int32   // max segment length in characters
-	splitOnWord     bool    // split on word rather than on token (when used with max_len)
-	maxTokens       int32   // max tokens per segment (0 = no limit)
-
-	// [EXPERIMENTAL] speed-up techniques
-	// note: these can significantly reduce the quality of the output
-	speedUp   bool  // speed-up the audio by 2x using Phase Vocoder
-	debugMode bool  // enable debug_mode provides extra info (eg. Dump log_mel)
-	audioCtx  int32 // overwrite the audio context size (0 = use default)
-
-	// [EXPERIMENTAL] [TDRZ] tinydiarize
-	tdrzEnable bool // enable tinydiarize speaker turn detection
-
-	// tokens to provide to the whisper decoder as initial prompt
-	// these are prepended to any existing text context from a previous call
-	initialPrompt uintptr
-	promptTokens  uintptr
-	promptNTokens int32
-
-	// for auto-detection, set to nullptr, "" or "auto"
-	language       uintptr
-	detectLanguage bool
-
-	// common decoding parameters:
-	suppressBlank           bool // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/decoding.py#L89
-	suppressNonSpeechTokens bool // ref: https://github.com/openai/whisper/blob/7858aa9c08d98f75575035ecd6481f462d66ca27/whisper/tokenizer.py#L224-L253
-
-	temperature   float32 // initial decoding temperature, ref: https://ai.stackexchange.com/a/32478
-	maxInitialTs  float32 // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/decoding.py#L97
-	lengthPenalty float32 // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/transcribe.py#L267
-
-	// fallback parameters
-	// ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/transcribe.py#L274-L278
-	temperatureInc float32
-	entropyThold   float32 // similar to OpenAI's "compression_ratio_threshold"
-	logprobThold   float32
-	noSpeechThold  float32 // [whisper.cpp] TODO: not implemented
-
-	//struct {
-	//	int best_of;    // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/transcribe.py#L264
-	//} greedy;
-	greedy uintptr
-
-	//struct {
-	//	int beam_size;  // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/transcribe.py#L265
-	//
-	//	float patience; // TODO: not implemented, ref: https://arxiv.org/pdf/2204.05424.pdf
-	//} beam_search;
-	beamSearch uintptr
-
-	// called for every newly generated text segment
-	newSegmentCallback         uintptr
-	newSegmentCallbackUserData uintptr
-
-	// called on each progress update
-	progressCallback         uintptr
-	progressCallbackUserData uintptr
-
-	// called each time before the encoder starts
-	encoderBeginCallback         uintptr
-	encoderBeginCallbackUserData uintptr
-
-	// called each time before ggml computation starts
-	abortCallback         uintptr
-	abortCallbackUserData uintptr
-
-	// called by each decoder to filter obtained logits
-	logitsFilterCallback         uintptr
-	logitsFilterCallbackUserData uintptr
-
-	grammarRules   uintptr
-	nGrammarRules  int32
-	iStartRule     int32
-	grammarPenalty float32
-}
+//
+//type CWhisperFullParams struct {
+//	strategy int32
+//
+//	nThreads    int32
+//	nMaxTextCtx int32 // max tokens to use from past text as prompt for the decoder
+//	offsetMs    int32 // start offset in ms
+//	durationMs  int32 // audio duration to process in ms
+//
+//	translate       bool
+//	noContext       bool // do not use past transcription (if any) as initial prompt for the decoder
+//	noTimestamps    bool // do not generate timestamps
+//	singleSegment   bool // force single segment output (useful for streaming)
+//	printSpecial    bool // print special tokens (e.g. <SOT>, <EOT>, <BEG>, etc.)
+//	printProgress   bool // print progress information
+//	printRealtime   bool // print results from within whisper.cpp (avoid it, use callback instead)
+//	printTimestamps bool // print timestamps for each text segment when printing realtime
+//
+//	// [EXPERIMENTAL] token-level timestamps
+//	tokenTimestamps bool    // enable token-level timestamps
+//	tholdPt         float32 // timestamp token probability threshold (~0.01)
+//	tholdPtsum      float32 // timestamp token sum probability threshold (~0.01)
+//	maxLen          int32   // max segment length in characters
+//	splitOnWord     bool    // split on word rather than on token (when used with max_len)
+//	maxTokens       int32   // max tokens per segment (0 = no limit)
+//
+//	// [EXPERIMENTAL] speed-up techniques
+//	// note: these can significantly reduce the quality of the output
+//	speedUp   bool  // speed-up the audio by 2x using Phase Vocoder
+//	debugMode bool  // enable debug_mode provides extra info (eg. Dump log_mel)
+//	audioCtx  int32 // overwrite the audio context size (0 = use default)
+//
+//	// [EXPERIMENTAL] [TDRZ] tinydiarize
+//	tdrzEnable bool // enable tinydiarize speaker turn detection
+//
+//	// tokens to provide to the whisper decoder as initial prompt
+//	// these are prepended to any existing text context from a previous call
+//	initialPrompt uintptr
+//	promptTokens  uintptr
+//	promptNTokens int32
+//
+//	// for auto-detection, set to nullptr, "" or "auto"
+//	language       uintptr
+//	detectLanguage bool
+//
+//	// common decoding parameters:
+//	suppressBlank           bool // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/decoding.py#L89
+//	suppressNonSpeechTokens bool // ref: https://github.com/openai/whisper/blob/7858aa9c08d98f75575035ecd6481f462d66ca27/whisper/tokenizer.py#L224-L253
+//
+//	temperature   float32 // initial decoding temperature, ref: https://ai.stackexchange.com/a/32478
+//	maxInitialTs  float32 // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/decoding.py#L97
+//	lengthPenalty float32 // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/transcribe.py#L267
+//
+//	// fallback parameters
+//	// ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/transcribe.py#L274-L278
+//	temperatureInc float32
+//	entropyThold   float32 // similar to OpenAI's "compression_ratio_threshold"
+//	logprobThold   float32
+//	noSpeechThold  float32 // [whisper.cpp] TODO: not implemented
+//
+//	//struct {
+//	//	int best_of;    // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/transcribe.py#L264
+//	//} greedy;
+//	greedy uintptr
+//
+//	//struct {
+//	//	int beam_size;  // ref: https://github.com/openai/whisper/blob/f82bc59f5ea234d4b97fb2860842ed38519f7e65/whisper/transcribe.py#L265
+//	//
+//	//	float patience; // TODO: not implemented, ref: https://arxiv.org/pdf/2204.05424.pdf
+//	//} beam_search;
+//	beamSearch uintptr
+//
+//	// called for every newly generated text segment
+//	newSegmentCallback         uintptr
+//	newSegmentCallbackUserData uintptr
+//
+//	// called on each progress update
+//	progressCallback         uintptr
+//	progressCallbackUserData uintptr
+//
+//	// called each time before the encoder starts
+//	encoderBeginCallback         uintptr
+//	encoderBeginCallbackUserData uintptr
+//
+//	// called each time before ggml computation starts
+//	abortCallback         uintptr
+//	abortCallbackUserData uintptr
+//
+//	// called by each decoder to filter obtained logits
+//	logitsFilterCallback         uintptr
+//	logitsFilterCallbackUserData uintptr
+//
+//	grammarRules   uintptr
+//	nGrammarRules  int32
+//	iStartRule     int32
+//	grammarPenalty float32
+//}
 
 type CWhisperFullParamsRef struct {
 	paramsRef uintptr
 }
 
-type CWhisperContextParams struct {
-	UseGpu bool
-}
+//type WhisperContextParams struct {
+//	UseGpu bool
+//}
 
-func (p *CWhisperContextParams) ToWhisperContextParamsRef() *WhisperContextParamsRef {
-	return &WhisperContextParamsRef{paramsRef: uintptr(unsafe.Pointer(p))}
-}
-
-type WhisperContextParamsRef struct {
+type CWhisperContextParamsRef struct {
 	paramsRef uintptr
-}
-
-func (r *WhisperContextParamsRef) ToWhisperFullParams() *CWhisperContextParams {
-	return (*CWhisperContextParams)(unsafe.Pointer(r.paramsRef))
 }
 
 type WhisperPos int
 type WhisperToken int
 type WhisperSeqId int
 
-type WhisperSamplingStrategy int32
+type WhisperSamplingStrategy int
 
 const (
 	WHISPER_SAMPLING_GREEDY WhisperSamplingStrategy = iota
 	WHISPER_SAMPLING_BEAM_SEARCH
 )
 
-type CWhisperTokenData struct {
-	// todo
-}
+type WhisperSamplingStrategyStr string
+
+const (
+	WHISPER_SAMPLING_GREEDY_S      WhisperSamplingStrategyStr = "WHISPER_SAMPLING_GREEDY"
+	WHISPER_SAMPLING_BEAM_SEARCH_S                            = "WHISPER_SAMPLING_BEAM_SEARCH"
+)
+
+//type CWhisperTokenData struct {
+//
+//}
 
 type CWhisper interface {
+	//=============================================whisper.h============================================================
+	// These APIs are compatible with memory structures and need to call whisper_abi
 	// WhisperInitFromFileWithParams WhisperInitFromBufferWithParams Various functions for loading a ggml whisper model.
 	// Allocate (almost) all memory needed for the model.
 	// Return NULL on failure
-	WhisperInitFromFileWithParams(pathModel string, params *WhisperContextParamsRef) *CWhisperContext
-	WhisperInitFromBufferWithParams(buffer []byte, params *WhisperContextParamsRef) *CWhisperContext
+	//WhisperInitFromFileWithParams(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext
+	//WhisperInitFromBufferWithParams(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext
 	// whisper_init_with_params(struct whisper_model_loader * loader, struct whisper_context_params params) error
 
 	// WhisperInitFromFileWithParamsNoState These are the same as the above, but the internal state of the context is not allocated automatically
 	// It is the responsibility of the caller to allocate the state using whisper_init_state() (#523)
-	WhisperInitFromFileWithParamsNoState(pathModel string, params *WhisperContextParamsRef) *CWhisperContext
-	WhisperInitFromBufferWithParamsNoState(buffer []byte, params *WhisperContextParamsRef) *CWhisperContext
+	//WhisperInitFromFileWithParamsNoState(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext
+	//WhisperInitFromBufferWithParamsNoState(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext
 	//whisper_init_with_params_no_state(struct whisper_model_loader * loader, struct whisper_context_params params)
 
 	WhisperInitState(ctx *CWhisperContext) *CWhisperState
@@ -321,7 +388,7 @@ type CWhisper interface {
 	WhisperFree(ctx *CWhisperContext)
 	WhisperFreeState(state *CWhisperState)
 	WhisperFreeParams(params *CWhisperFullParamsRef)
-	WhisperFreeContextParams(params *WhisperContextParamsRef)
+	WhisperFreeContextParams(params *CWhisperContextParamsRef)
 
 	// WhisperPcmToMel Convert RAW PCM audio to log mel spectrogram.
 	// The resulting spectrogram is stored inside the default state of the provided whisper context.
@@ -440,25 +507,27 @@ type CWhisper interface {
 	// WhisperPrintSystemInfo Print system information
 	WhisperPrintSystemInfo() string
 
-	// WhisperContextDefaultParamsByRef NOTE: this function allocates memory, and it is the responsibility of the caller to free the pointer - see whisper_free_context_params & whisper_free_params()
-	WhisperContextDefaultParamsByRef() *WhisperContextParamsRef
-	WhisperContextDefaultParams() *CWhisperContextParams
+	// WhisperContextDefaultParamsByRef WhisperFullDefaultParamsByRef NOTE: this function allocates memory, and it is the responsibility of the caller to free the pointer - see whisper_free_context_params & whisper_free_params()
+	WhisperContextDefaultParamsByRef() *CWhisperContextParamsRef
 	WhisperFullDefaultParamsByRef(strategy WhisperSamplingStrategy) *CWhisperFullParamsRef
-	WhisperFullDefaultParams(strategy WhisperSamplingStrategy) *CWhisperFullParams
 
+	// These APIs are compatible with memory structures and need to call whisper_abi
+	//WhisperContextDefaultParams() *WhisperContextParams
+	//WhisperFullDefaultParams(strategy WhisperSamplingStrategy) *CWhisperFullParams
+	// These APIs are compatible with memory structures and need to call whisper_abi
 	// WhisperFull Run the entire model: PCM -> log mel spectrogram -> encoder -> decoder -> text
 	// Not thread safe for same context
 	// Uses the specified decoding strategy to obtain the text.
-	WhisperFull(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int) int
-
-	WhisperFullWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []float32, nSamples int) int
-
+	//WhisperFull(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int) int
+	//
+	//WhisperFullWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []float32, nSamples int) int
+	//
 	// WhisperFullParallel Split the input audio in chunks and process each chunk separately using whisper_full_with_state()
 	// Result is stored in the default state of the context
 	// Not thread safe if executed in parallel on the same context.
 	// It seems this approach can offer some speedup in some cases.
 	// However, the transcription accuracy can be worse at the beginning and end of each chunk.
-	WhisperFullParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples, nProcessors int) int
+	//WhisperFullParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples, nProcessors int) int
 
 	// WhisperFullNSegments WhisperFullNSegmentsFromState Number of generated text segments
 	// A segment can be a few words, a sentence, or even a paragraph.
@@ -499,22 +568,89 @@ type CWhisper interface {
 
 	// WhisperFullGetTokenData WhisperFullGetTokenDataFromState Get token data for the specified token in the specified segment
 	// This contains probabilities, timestamps, etc.
-	WhisperFullGetTokenData(ctx *CWhisperContext, iSegment, iToken int) CWhisperTokenData
-	WhisperFullGetTokenDataFromState(state *CWhisperState, iSegment, iToken int) CWhisperTokenData
+	//WhisperFullGetTokenData(ctx *CWhisperContext, iSegment, iToken int) CWhisperTokenData
+	//WhisperFullGetTokenDataFromState(state *CWhisperState, iSegment, iToken int) CWhisperTokenData
 
 	// WhisperFullGetTokenP WhisperFullGetTokenPFromState Get the probability of the specified token in the specified segment
 	WhisperFullGetTokenP(ctx *CWhisperContext, iSegment, iToken int) float32
 	WhisperFullGetTokenPFromState(state *CWhisperState, iSegment, iToken int) float32
+
+	//=============================================whisper_abi.h========================================================
+
+	WhisperContextParamsSetUseGpu(ctx *CWhisperContext, useGPU bool)
+
+	WhisperFullParamsSetStrategy(ctx *CWhisperFullParamsRef, strategy string)
+
+	WhisperFullParamsSetNThreads(ctx *CWhisperFullParamsRef, nThreads int)
+	WhisperFullParamsSetNMaxTextCtx(ctx *CWhisperFullParamsRef, nMaxTextCtx int)
+	WhisperFullParamsSetOffsetMs(ctx *CWhisperFullParamsRef, offsetMs int)
+	WhisperFullParamsSetDurationMs(ctx *CWhisperFullParamsRef, durationMs int)
+
+	WhisperFullParamsSetTranslate(ctx *CWhisperFullParamsRef, translate bool)
+	WhisperFullParamsSetNoContext(ctx *CWhisperFullParamsRef, noContext bool)
+	WhisperFullParamsSetNoTimestamps(ctx *CWhisperFullParamsRef, noTimestamps bool)
+	WhisperFullParamsSetSingleSegment(ctx *CWhisperFullParamsRef, singleSegment bool)
+	WhisperFullParamsSetPrintSpecial(ctx *CWhisperFullParamsRef, printSpecial bool)
+	WhisperFullParamsSetPrintProgress(ctx *CWhisperFullParamsRef, printProgress bool)
+	WhisperFullParamsSetPrintRealtime(ctx *CWhisperFullParamsRef, printRealtime bool)
+	WhisperFullParamsSetPrintTimestamps(ctx *CWhisperFullParamsRef, printTimestamps bool)
+
+	WhisperFullParamsSetTokenTimestamps(ctx *CWhisperFullParamsRef, tokenTimestamps bool)
+	WhisperFullParamsSetTholdPt(ctx *CWhisperFullParamsRef, tholdPt float32)
+	WhisperFullParamsSetTholdPtsum(ctx *CWhisperFullParamsRef, tholdPtsum float32)
+	WhisperFullParamsSetMaxLen(ctx *CWhisperFullParamsRef, maxLen int)
+	WhisperFullParamsSetSplitOnWord(ctx *CWhisperFullParamsRef, splitOnWord bool)
+	WhisperFullParamsSetMaxTokens(ctx *CWhisperFullParamsRef, maxTokens int)
+
+	WhisperFullParamsSetSpeedUp(ctx *CWhisperFullParamsRef, speedUp bool)
+	WhisperFullParamsSetDebugMode(ctx *CWhisperFullParamsRef, debugMode bool)
+	WhisperFullParamsSetAudioCtx(ctx *CWhisperFullParamsRef, audioCtx int)
+
+	WhisperFullParamsSetTdrzEnable(ctx *CWhisperFullParamsRef, tdrzEnable bool)
+
+	WhisperFullParamsSetInitialPrompt(ctx *CWhisperFullParamsRef, initialPrompt string)
+	WhisperFullParamsSetPromptTokens(ctx *CWhisperFullParamsRef, promptTokens []int32)
+	WhisperFullParamsSetPromptNTokens(ctx *CWhisperFullParamsRef, promptNTokens int)
+
+	WhisperFullParamsSetLanguage(ctx *CWhisperFullParamsRef, language string)
+	WhisperFullParamsSetDetectLanguage(ctx *CWhisperFullParamsRef, detectLanguage bool)
+
+	WhisperFullParamsSetSuppressBlank(ctx *CWhisperFullParamsRef, suppressBlank bool)
+	WhisperFullParamsSetSuppressNonSpeechTokens(ctx *CWhisperFullParamsRef, suppressNonSpeechTokens bool)
+
+	WhisperFullParamsSetTemperature(ctx *CWhisperFullParamsRef, temperature float32)
+	WhisperFullParamsSetMaxInitialTs(ctx *CWhisperFullParamsRef, maxInitialTs float32)
+	WhisperFullParamsSetLengthPenalty(ctx *CWhisperFullParamsRef, lengthPenalty float32)
+
+	WhisperFullParamsSetTemperatureInc(ctx *CWhisperFullParamsRef, temperatureInc float32)
+	WhisperFullParamsSetEntropyThold(ctx *CWhisperFullParamsRef, entropyThold float32)
+	WhisperFullParamsSetLogprobThold(ctx *CWhisperFullParamsRef, logprobThold float32)
+	WhisperFullParamsSetNoSpeechThold(ctx *CWhisperFullParamsRef, noSpeechThold float32)
+
+	WhisperFullParamsSetGreedyBestOf(ctx *CWhisperFullParamsRef, bestOf int)
+	WhisperFullParamsSetBeamSearchBeamSize(ctx *CWhisperFullParamsRef, beamSize int)
+	WhisperFullParamsSetBeamSearchPatience(ctx *CWhisperFullParamsRef, patience float32)
+
+	WhisperInitFromFileWithParamsRef(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext
+	WhisperInitFromBufferWithParamsRef(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext
+
+	WhisperInitFromFileWithParamsRefNoState(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext
+	WhisperInitFromBufferWithParamsRefNoState(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext
+
+	WhisperFullRef(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int) int
+	WhisperFullRefWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []float32, nSamples int) int
+	WhisperFullRefParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int, nProcessors int) int
 }
 
 type CWhisperImpl struct {
-	libWhisper                       uintptr
-	cWhisperInitFromFileWithParams   func(pathModel string, params uintptr) uintptr
-	cWhisperInitFromBufferWithParams func(buffer uintptr, bufferSize int, params uintptr) uintptr
+	libWhisper uintptr
+	//=============================================whisper.h============================================================
+	//cWhisperInitFromFileWithParams   func(pathModel string, params uintptr) uintptr
+	//cWhisperInitFromBufferWithParams func(buffer uintptr, bufferSize int, params uintptr) uintptr
 	//cWhisperInitWithParams           func()
 
-	cWhisperInitFromFileWithParamsNoState   func(pathModel string, params uintptr) uintptr
-	cWhisperInitFromBufferWithParamsNoState func(buffer uintptr, bufferSize int, params uintptr) uintptr
+	//cWhisperInitFromFileWithParamsNoState   func(pathModel string, params uintptr) uintptr
+	//cWhisperInitFromBufferWithParamsNoState func(buffer uintptr, bufferSize int, params uintptr) uintptr
 	//cWhisperInitWithParamsNoState           func()
 
 	cWhisperInitState              func(ctx uintptr) uintptr
@@ -597,10 +733,10 @@ type CWhisperImpl struct {
 	cWhisperFullDefaultParamsByRef    func(strategy int) uintptr
 	cWhisperFullDefaultParams         func(strategy int) uintptr
 
-	cWhisperFull          func(ctx uintptr, params uintptr, samples *float32, nSamples int) int
-	cWhisperFullWithState func(ctx uintptr, state uintptr, params uintptr, samples *float32, nSamples int) int
-
-	cWhisperFullParallel func(ctx uintptr, params uintptr, samples *float32, nSamples, nProcessors int) int
+	//cWhisperFull          func(ctx uintptr, params uintptr, samples *float32, nSamples int) int
+	//cWhisperFullWithState func(ctx uintptr, state uintptr, params uintptr, samples *float32, nSamples int) int
+	//
+	//cWhisperFullParallel func(ctx uintptr, params uintptr, samples *float32, nSamples, nProcessors int) int
 
 	cWhisperFullNSegments          func(ctx uintptr) int
 	cWhisperFullNSegmentsFromState func(state uintptr) int
@@ -630,26 +766,91 @@ type CWhisperImpl struct {
 	cWhisperFullGetTokenId          func(ctx uintptr, iSegment, iToken int) int
 	cWhisperFullGetTokenIdFromState func(state uintptr, iSegment, iToken int) int
 
-	// TODO
 	//cWhisperFullGetTokenData          func()
 	//cWhisperFullGetTokenDataFromState func()
 
 	cWhisperFullGetTokenP          func(ctx uintptr, iSegment, iToken int) float32
 	cWhisperFullGetTokenPFromState func(state uintptr, iSegment, iToken int) float32
+
+	//=============================================whisper_abi.h========================================================
+	cWhisperContextParamsSetUseGpu func(ctx uintptr, useGPU bool)
+
+	cWhisperFullParamsSetStrategy func(ctx uintptr, strategy string)
+
+	cWhisperFullParamsSetNThreads    func(ctx uintptr, nThreads int)
+	cWhisperFullParamsSetNMaxTextCtx func(ctx uintptr, nMaxTextCtx int)
+	cWhisperFullParamsSetOffsetMs    func(ctx uintptr, offsetMs int)
+	cWhisperFullParamsSetDurationMs  func(ctx uintptr, durationMs int)
+
+	cWhisperFullParamsSetTranslate       func(ctx uintptr, translate bool)
+	cWhisperFullParamsSetNoContext       func(ctx uintptr, noContext bool)
+	cWhisperFullParamsSetNoTimestamps    func(ctx uintptr, noTimestamps bool)
+	cWhisperFullParamsSetSingleSegment   func(ctx uintptr, singleSegment bool)
+	cWhisperFullParamsSetPrintSpecial    func(ctx uintptr, printSpecial bool)
+	cWhisperFullParamsSetPrintProgress   func(ctx uintptr, printProgress bool)
+	cWhisperFullParamsSetPrintRealtime   func(ctx uintptr, printRealtime bool)
+	cWhisperFullParamsSetPrintTimestamps func(ctx uintptr, printTimestamps bool)
+
+	cWhisperFullParamsSetTokenTimestamps func(ctx uintptr, tokenTimestamps bool)
+	cWhisperFullParamsSetTholdPt         func(ctx uintptr, tholdPt float32)
+	cWhisperFullParamsSetTholdPtsum      func(ctx uintptr, tholdPtsum float32)
+	cWhisperFullParamsSetMaxLen          func(ctx uintptr, maxLen int)
+	cWhisperFullParamsSetSplitOnWord     func(ctx uintptr, splitOnWord bool)
+	cWhisperFullParamsSetMaxTokens       func(ctx uintptr, maxTokens int)
+
+	cWhisperFullParamsSetSpeedUp   func(ctx uintptr, speedUp bool)
+	cWhisperFullParamsSetDebugMode func(ctx uintptr, debugMode bool)
+	cWhisperFullParamsSetAudioCtx  func(ctx uintptr, audioCtx int)
+
+	cWhisperFullParamsSetTdrzEnable func(ctx uintptr, tdrzEnable bool)
+
+	cWhisperFullParamsSetInitialPrompt func(ctx uintptr, initialPrompt string)
+	cWhisperFullParamsSetPromptTokens  func(ctx uintptr, promptTokens *int32)
+	cWhisperFullParamsSetPromptNTokens func(ctx uintptr, promptNTokens int)
+
+	cWhisperFullParamsSetLanguage       func(ctx uintptr, language string)
+	cWhisperFullParamsSetDetectLanguage func(ctx uintptr, detectLanguage bool)
+
+	cWhisperFullParamsSetSuppressBlank           func(ctx uintptr, suppressBlank bool)
+	cWhisperFullParamsSetSuppressNonSpeechTokens func(ctx uintptr, suppressNonSpeechTokens bool)
+
+	cWhisperFullParamsSetTemperature   func(ctx uintptr, temperature float32)
+	cWhisperFullParamsSetMaxInitialTs  func(ctx uintptr, maxInitialTs float32)
+	cWhisperFullParamsSetLengthPenalty func(ctx uintptr, lengthPenalty float32)
+
+	cWhisperFullParamsSetTemperatureInc func(ctx uintptr, temperatureInc float32)
+	cWhisperFullParamsSetEntropyThold   func(ctx uintptr, entropyThold float32)
+	cWhisperFullParamsSetLogprobThold   func(ctx uintptr, logprobThold float32)
+	cWhisperFullParamsSetNoSpeechThold  func(ctx uintptr, noSpeechThold float32)
+
+	cWhisperFullParamsSetGreedyBestOf       func(ctx uintptr, bestOf int)
+	cWhisperFullParamsSetBeamSearchBeamSize func(ctx uintptr, beamSize int)
+	cWhisperFullParamsSetBeamSearchPatience func(ctx uintptr, patience float32)
+
+	whisperInitFromFileWithParamsRef   func(pathModel string, params uintptr) uintptr
+	whisperInitFromBufferWithParamsRef func(buffer uintptr, bufferSize int64, params uintptr) uintptr
+
+	whisperInitFromFileWithParamsRefNoState   func(pathModel string, params uintptr) uintptr
+	whisperInitFromBufferWithParamsRefNoState func(buffer uintptr, bufferSize int64, params uintptr) uintptr
+
+	cWhisperFullParamsFullRef          func(ctx uintptr, params uintptr, samples uintptr, nSamples int) int
+	cWhisperFullParamsFullRefWithState func(ctx uintptr, state uintptr, params uintptr, samples uintptr, nSamples int) int
+	cWhisperFullParamsFullRefParallel  func(ctx uintptr, params uintptr, samples uintptr, nSamples int, nProcessors int) int
 }
 
-func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
+func NewCWhisper(libraryPath string) (CWhisper, error) {
 	libWhisper, err := openLibrary(libraryPath)
 	if err != nil {
 		return nil, err
 	}
 	var (
-		whisperInitFromFileWithParams   func(pathModel string, params uintptr) uintptr
-		whisperInitFromBufferWithParams func(buffer uintptr, bufferSize int, params uintptr) uintptr
+		//=============================================whisper.h========================================================
+		//whisperInitFromFileWithParams   func(pathModel string, params uintptr) uintptr
+		//whisperInitFromBufferWithParams func(buffer uintptr, bufferSize int, params uintptr) uintptr
 		//whisperInitWithParams           func()
 
-		whisperInitFromFileWithParamsNoState   func(pathModel string, params uintptr) uintptr
-		whisperInitFromBufferWithParamsNoState func(buffer uintptr, bufferSize int, params uintptr) uintptr
+		//whisperInitFromFileWithParamsNoState   func(pathModel string, params uintptr) uintptr
+		//whisperInitFromBufferWithParamsNoState func(buffer uintptr, bufferSize int, params uintptr) uintptr
 		//whisperInitWithParamsNoState           func()
 
 		whisperInitState              func(ctx uintptr) uintptr
@@ -732,10 +933,10 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 		whisperFullDefaultParamsByRef    func(strategy int) uintptr
 		whisperFullDefaultParams         func(strategy int) uintptr
 
-		whisperFull          func(ctx uintptr, params uintptr, samples *float32, nSamples int) int
-		whisperFullWithState func(ctx uintptr, state uintptr, params uintptr, samples *float32, nSamples int) int
-
-		whisperFullParallel func(ctx uintptr, params uintptr, samples *float32, nSamples, nProcessors int) int
+		//whisperFull          func(ctx uintptr, params uintptr, samples *float32, nSamples int) int
+		//whisperFullWithState func(ctx uintptr, state uintptr, params uintptr, samples *float32, nSamples int) int
+		//
+		//whisperFullParallel func(ctx uintptr, params uintptr, samples *float32, nSamples, nProcessors int) int
 
 		whisperFullNSegments          func(ctx uintptr) int
 		whisperFullNSegmentsFromState func(state uintptr) int
@@ -770,13 +971,81 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 
 		whisperFullGetTokenP          func(ctx uintptr, iSegment, iToken int) float32
 		whisperFullGetTokenPFromState func(state uintptr, iSegment, iToken int) float32
-	)
-	purego.RegisterLibFunc(&whisperInitFromFileWithParams, libWhisper, cWhisperInitFromFileWithParams)
-	purego.RegisterLibFunc(&whisperInitFromBufferWithParams, libWhisper, cWhisperInitFromBufferWithParams)
-	//purego.RegisterLibFunc(&whisperInitWithParams, libWhisper, cWhisperInitWithParams)
 
-	purego.RegisterLibFunc(&whisperInitFromFileWithParamsNoState, libWhisper, cWhisperInitFromFileWithParamsNoState)
-	purego.RegisterLibFunc(&whisperInitFromBufferWithParamsNoState, libWhisper, cWhisperInitFromBufferWithParamsNoState)
+		//=============================================whisper_abi.h====================================================
+		whisperContextParamsSetUseGpu func(ctx uintptr, useGPU bool)
+
+		whisperFullParamsSetStrategy func(ctx uintptr, strategy string)
+
+		whisperFullParamsSetNThreads    func(ctx uintptr, nThreads int)
+		whisperFullParamsSetNMaxTextCtx func(ctx uintptr, nMaxTextCtx int)
+		whisperFullParamsSetOffsetMs    func(ctx uintptr, offsetMs int)
+		whisperFullParamsSetDurationMs  func(ctx uintptr, durationMs int)
+
+		whisperFullParamsSetTranslate       func(ctx uintptr, translate bool)
+		whisperFullParamsSetNoContext       func(ctx uintptr, noContext bool)
+		whisperFullParamsSetNoTimestamps    func(ctx uintptr, noTimestamps bool)
+		whisperFullParamsSetSingleSegment   func(ctx uintptr, singleSegment bool)
+		whisperFullParamsSetPrintSpecial    func(ctx uintptr, printSpecial bool)
+		whisperFullParamsSetPrintProgress   func(ctx uintptr, printProgress bool)
+		whisperFullParamsSetPrintRealtime   func(ctx uintptr, printRealtime bool)
+		whisperFullParamsSetPrintTimestamps func(ctx uintptr, printTimestamps bool)
+
+		whisperFullParamsSetTokenTimestamps func(ctx uintptr, tokenTimestamps bool)
+		whisperFullParamsSetTholdPt         func(ctx uintptr, tholdPt float32)
+		whisperFullParamsSetTholdPtsum      func(ctx uintptr, tholdPtsum float32)
+		whisperFullParamsSetMaxLen          func(ctx uintptr, maxLen int)
+		whisperFullParamsSetSplitOnWord     func(ctx uintptr, splitOnWord bool)
+		whisperFullParamsSetMaxTokens       func(ctx uintptr, maxTokens int)
+
+		whisperFullParamsSetSpeedUp   func(ctx uintptr, speedUp bool)
+		whisperFullParamsSetDebugMode func(ctx uintptr, debugMode bool)
+		whisperFullParamsSetAudioCtx  func(ctx uintptr, audioCtx int)
+
+		whisperFullParamsSetTdrzEnable func(ctx uintptr, tdrzEnable bool)
+
+		whisperFullParamsSetInitialPrompt func(ctx uintptr, initialPrompt string)
+		whisperFullParamsSetPromptTokens  func(ctx uintptr, promptTokens *int32)
+		whisperFullParamsSetPromptNTokens func(ctx uintptr, promptNTokens int)
+
+		whisperFullParamsSetLanguage       func(ctx uintptr, language string)
+		whisperFullParamsSetDetectLanguage func(ctx uintptr, detectLanguage bool)
+
+		whisperFullParamsSetSuppressBlank           func(ctx uintptr, suppressBlank bool)
+		whisperFullParamsSetSuppressNonSpeechTokens func(ctx uintptr, suppressNonSpeechTokens bool)
+
+		whisperFullParamsSetTemperature   func(ctx uintptr, temperature float32)
+		whisperFullParamsSetMaxInitialTs  func(ctx uintptr, maxInitialTs float32)
+		whisperFullParamsSetLengthPenalty func(ctx uintptr, lengthPenalty float32)
+
+		whisperFullParamsSetTemperatureInc func(ctx uintptr, temperatureInc float32)
+		whisperFullParamsSetEntropyThold   func(ctx uintptr, entropyThold float32)
+		whisperFullParamsSetLogprobThold   func(ctx uintptr, logprobThold float32)
+		whisperFullParamsSetNoSpeechThold  func(ctx uintptr, noSpeechThold float32)
+
+		whisperFullParamsSetGreedyBestOf       func(ctx uintptr, bestOf int)
+		whisperFullParamsSetBeamSearchBeamSize func(ctx uintptr, beamSize int)
+		whisperFullParamsSetBeamSearchPatience func(ctx uintptr, patience float32)
+
+		whisperInitFromFileWithParamsRef   func(pathModel string, params uintptr) uintptr
+		whisperInitFromBufferWithParamsRef func(buffer uintptr, bufferSize int64, params uintptr) uintptr
+
+		whisperInitFromFileWithParamsRefNoState   func(pathModel string, params uintptr) uintptr
+		whisperInitFromBufferWithParamsRefNoState func(buffer uintptr, bufferSize int64, params uintptr) uintptr
+
+		whisperFullParamsFullRef          func(ctx uintptr, params uintptr, samples uintptr, nSamples int) int
+		whisperFullParamsFullRefWithState func(ctx uintptr, state uintptr, params uintptr, samples uintptr, nSamples int) int
+		whisperFullParamsFullRefParallel  func(ctx uintptr, params uintptr, samples uintptr, nSamples int, nProcessors int) int
+	)
+
+	//=============================================whisper.h============================================================
+
+	//purego.RegisterLibFunc(&whisperInitFromFileWithParams, libWhisper, cWhisperInitFromFileWithParams)
+	//purego.RegisterLibFunc(&whisperInitFromBufferWithParams, libWhisper, cWhisperInitFromBufferWithParams)
+	//purego.RegisterLibFunc(&whisperInitWithParams, libWhisper, cWhisperInitWithParams)
+	//
+	//purego.RegisterLibFunc(&whisperInitFromFileWithParamsNoState, libWhisper, cWhisperInitFromFileWithParamsNoState)
+	//purego.RegisterLibFunc(&whisperInitFromBufferWithParamsNoState, libWhisper, cWhisperInitFromBufferWithParamsNoState)
 	//purego.RegisterLibFunc(&whisperInitWithParamsNoState, libWhisper, cWhisperInitWithParamsNoState)
 
 	purego.RegisterLibFunc(&whisperInitState, libWhisper, cWhisperInitState)
@@ -859,10 +1128,10 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 	purego.RegisterLibFunc(&whisperFullDefaultParamsByRef, libWhisper, cWhisperFullDefaultParamsByRef)
 	purego.RegisterLibFunc(&whisperFullDefaultParams, libWhisper, cWhisperFullDefaultParams)
 
-	purego.RegisterLibFunc(&whisperFull, libWhisper, cWhisperFull)
-	purego.RegisterLibFunc(&whisperFullWithState, libWhisper, cWhisperFullWithState)
-
-	purego.RegisterLibFunc(&whisperFullParallel, libWhisper, cWhisperFullParallel)
+	//purego.RegisterLibFunc(&whisperFull, libWhisper, cWhisperFull)
+	//purego.RegisterLibFunc(&whisperFullWithState, libWhisper, cWhisperFullWithState)
+	//
+	//purego.RegisterLibFunc(&whisperFullParallel, libWhisper, cWhisperFullParallel)
 	purego.RegisterLibFunc(&whisperFullNSegments, libWhisper, cWhisperFullNSegments)
 
 	purego.RegisterLibFunc(&whisperFullNSegmentsFromState, libWhisper, cWhisperFullNSegmentsFromState)
@@ -897,14 +1166,78 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 	purego.RegisterLibFunc(&whisperFullGetTokenP, libWhisper, cWhisperFullGetTokenP)
 	purego.RegisterLibFunc(&whisperFullGetTokenPFromState, libWhisper, cWhisperFullGetTokenPFromState)
 
+	//=============================================whisper_abi.h========================================================
+	purego.RegisterLibFunc(&whisperContextParamsSetUseGpu, libWhisper, cWhisperContextParamsSetUseGpu)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetStrategy, libWhisper, cWhisperFullParamsSetStrategy)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetNThreads, libWhisper, cWhisperFullParamsSetNThreads)
+	purego.RegisterLibFunc(&whisperFullParamsSetNMaxTextCtx, libWhisper, cWhisperFullParamsSetNMaxTextCtx)
+	purego.RegisterLibFunc(&whisperFullParamsSetOffsetMs, libWhisper, cWhisperFullParamsSetOffsetMs)
+	purego.RegisterLibFunc(&whisperFullParamsSetDurationMs, libWhisper, cWhisperFullParamsSetDurationMs)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetTranslate, libWhisper, cWhisperFullParamsSetTranslate)
+	purego.RegisterLibFunc(&whisperFullParamsSetNoContext, libWhisper, cWhisperFullParamsSetNoContext)
+	purego.RegisterLibFunc(&whisperFullParamsSetNoTimestamps, libWhisper, cWhisperFullParamsSetNoTimestamps)
+	purego.RegisterLibFunc(&whisperFullParamsSetSingleSegment, libWhisper, cWhisperFullParamsSetSingleSegment)
+	purego.RegisterLibFunc(&whisperFullParamsSetPrintSpecial, libWhisper, cWhisperFullParamsSetPrintSpecial)
+	purego.RegisterLibFunc(&whisperFullParamsSetPrintProgress, libWhisper, cWhisperFullParamsSetPrintProgress)
+	purego.RegisterLibFunc(&whisperFullParamsSetPrintRealtime, libWhisper, cWhisperFullParamsSetPrintRealtime)
+	purego.RegisterLibFunc(&whisperFullParamsSetPrintTimestamps, libWhisper, cWhisperFullParamsSetPrintTimestamps)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetTokenTimestamps, libWhisper, cWhisperFullParamsSetTokenTimestamps)
+	purego.RegisterLibFunc(&whisperFullParamsSetTholdPt, libWhisper, cWhisperFullParamsSetTholdPt)
+	purego.RegisterLibFunc(&whisperFullParamsSetTholdPtsum, libWhisper, cWhisperFullParamsSetTholdPtsum)
+	purego.RegisterLibFunc(&whisperFullParamsSetMaxLen, libWhisper, cWhisperFullParamsSetMaxLen)
+	purego.RegisterLibFunc(&whisperFullParamsSetSplitOnWord, libWhisper, cWhisperFullParamsSetSplitOnWord)
+	purego.RegisterLibFunc(&whisperFullParamsSetMaxTokens, libWhisper, cWhisperFullParamsSetMaxTokens)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetSpeedUp, libWhisper, cWhisperFullParamsSetSpeedUp)
+	purego.RegisterLibFunc(&whisperFullParamsSetDebugMode, libWhisper, cWhisperFullParamsSetDebugMode)
+	purego.RegisterLibFunc(&whisperFullParamsSetAudioCtx, libWhisper, cWhisperFullParamsSetAudioCtx)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetTdrzEnable, libWhisper, cWhisperFullParamsSetTdrzEnable)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetInitialPrompt, libWhisper, cWhisperFullParamsSetInitialPrompt)
+	purego.RegisterLibFunc(&whisperFullParamsSetPromptTokens, libWhisper, cWhisperFullParamsSetPromptTokens)
+	purego.RegisterLibFunc(&whisperFullParamsSetPromptNTokens, libWhisper, cWhisperFullParamsSetPromptNTokens)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetLanguage, libWhisper, cWhisperFullParamsSetLanguage)
+	purego.RegisterLibFunc(&whisperFullParamsSetDetectLanguage, libWhisper, cWhisperFullParamsSetDetectLanguage)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetSuppressBlank, libWhisper, cWhisperFullParamsSetSuppressBlank)
+	purego.RegisterLibFunc(&whisperFullParamsSetSuppressNonSpeechTokens, libWhisper, cWhisperFullParamsSetSuppressNonSpeechTokens)
+	purego.RegisterLibFunc(&whisperFullParamsSetTemperature, libWhisper, cWhisperFullParamsSetTemperature)
+	purego.RegisterLibFunc(&whisperFullParamsSetMaxInitialTs, libWhisper, cWhisperFullParamsSetMaxInitialTs)
+	purego.RegisterLibFunc(&whisperFullParamsSetLengthPenalty, libWhisper, cWhisperFullParamsSetLengthPenalty)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetTemperatureInc, libWhisper, cWhisperFullParamsSetTemperatureInc)
+	purego.RegisterLibFunc(&whisperFullParamsSetEntropyThold, libWhisper, cWhisperFullParamsSetEntropyThold)
+	purego.RegisterLibFunc(&whisperFullParamsSetLogprobThold, libWhisper, cWhisperFullParamsSetLogprobThold)
+	purego.RegisterLibFunc(&whisperFullParamsSetNoSpeechThold, libWhisper, cWhisperFullParamsSetNoSpeechThold)
+
+	purego.RegisterLibFunc(&whisperFullParamsSetGreedyBestOf, libWhisper, cWhisperFullParamsSetGreedyBestOf)
+	purego.RegisterLibFunc(&whisperFullParamsSetBeamSearchBeamSize, libWhisper, cWhisperFullParamsSetBeamSearchBeamSize)
+	purego.RegisterLibFunc(&whisperFullParamsSetBeamSearchPatience, libWhisper, cWhisperFullParamsSetBeamSearchPatience)
+
+	purego.RegisterLibFunc(&whisperInitFromFileWithParamsRef, libWhisper, cWhisperInitFromFileWithParamsRef)
+	purego.RegisterLibFunc(&whisperInitFromBufferWithParamsRef, libWhisper, cWhisperInitFromBufferWithParamsRef)
+
+	purego.RegisterLibFunc(&whisperInitFromFileWithParamsRefNoState, libWhisper, cWhisperInitFromFileWithParamsRefNoState)
+	purego.RegisterLibFunc(&whisperInitFromBufferWithParamsRefNoState, libWhisper, cWhisperInitFromBufferWithParamsRefNoState)
+
+	purego.RegisterLibFunc(&whisperFullParamsFullRef, libWhisper, cWhisperFullRef)
+	purego.RegisterLibFunc(&whisperFullParamsFullRefWithState, libWhisper, cWhisperFullRefWithState)
+	purego.RegisterLibFunc(&whisperFullParamsFullRefParallel, libWhisper, cWhisperFullRefParallel)
+
 	return &CWhisperImpl{
-		libWhisper:                       libWhisper,
-		cWhisperInitFromFileWithParams:   whisperInitFromFileWithParams,
-		cWhisperInitFromBufferWithParams: whisperInitFromBufferWithParams,
+		libWhisper: libWhisper,
+		//cWhisperInitFromFileWithParams:   whisperInitFromFileWithParams,
+		//cWhisperInitFromBufferWithParams: whisperInitFromBufferWithParams,
 		//whisperInitWithParams           func()
 
-		cWhisperInitFromFileWithParamsNoState:   whisperInitFromFileWithParamsNoState,
-		cWhisperInitFromBufferWithParamsNoState: whisperInitFromBufferWithParamsNoState,
+		//cWhisperInitFromFileWithParamsNoState:   whisperInitFromFileWithParamsNoState,
+		//cWhisperInitFromBufferWithParamsNoState: whisperInitFromBufferWithParamsNoState,
 		//whisperInitWithParamsNoState           func()
 
 		cWhisperInitState:              whisperInitState,
@@ -986,10 +1319,10 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 		cWhisperFullDefaultParamsByRef:    whisperFullDefaultParamsByRef,
 		cWhisperFullDefaultParams:         whisperFullDefaultParams,
 
-		cWhisperFull:          whisperFull,
-		cWhisperFullWithState: whisperFullWithState,
-
-		cWhisperFullParallel: whisperFullParallel,
+		//cWhisperFull:          whisperFull,
+		//cWhisperFullWithState: whisperFullWithState,
+		//
+		//cWhisperFullParallel: whisperFullParallel,
 
 		cWhisperFullNSegments:          whisperFullNSegments,
 		cWhisperFullNSegmentsFromState: whisperFullNSegmentsFromState,
@@ -1025,31 +1358,95 @@ func NewCWhisper(libraryPath string) (*CWhisperImpl, error) {
 
 		cWhisperFullGetTokenP:          whisperFullGetTokenP,
 		cWhisperFullGetTokenPFromState: whisperFullGetTokenPFromState,
+
+		cWhisperContextParamsSetUseGpu: whisperContextParamsSetUseGpu,
+
+		cWhisperFullParamsSetStrategy: whisperFullParamsSetStrategy,
+
+		cWhisperFullParamsSetNThreads:    whisperFullParamsSetNThreads,
+		cWhisperFullParamsSetNMaxTextCtx: whisperFullParamsSetNMaxTextCtx,
+		cWhisperFullParamsSetOffsetMs:    whisperFullParamsSetOffsetMs,
+		cWhisperFullParamsSetDurationMs:  whisperFullParamsSetDurationMs,
+
+		cWhisperFullParamsSetTranslate:       whisperFullParamsSetTranslate,
+		cWhisperFullParamsSetNoContext:       whisperFullParamsSetNoContext,
+		cWhisperFullParamsSetNoTimestamps:    whisperFullParamsSetNoTimestamps,
+		cWhisperFullParamsSetSingleSegment:   whisperFullParamsSetSingleSegment,
+		cWhisperFullParamsSetPrintSpecial:    whisperFullParamsSetPrintSpecial,
+		cWhisperFullParamsSetPrintProgress:   whisperFullParamsSetPrintProgress,
+		cWhisperFullParamsSetPrintRealtime:   whisperFullParamsSetPrintRealtime,
+		cWhisperFullParamsSetPrintTimestamps: whisperFullParamsSetPrintTimestamps,
+
+		cWhisperFullParamsSetTokenTimestamps: whisperFullParamsSetTokenTimestamps,
+		cWhisperFullParamsSetTholdPt:         whisperFullParamsSetTholdPt,
+		cWhisperFullParamsSetTholdPtsum:      whisperFullParamsSetTholdPtsum,
+		cWhisperFullParamsSetMaxLen:          whisperFullParamsSetMaxLen,
+		cWhisperFullParamsSetSplitOnWord:     whisperFullParamsSetSplitOnWord,
+		cWhisperFullParamsSetMaxTokens:       whisperFullParamsSetMaxTokens,
+
+		cWhisperFullParamsSetSpeedUp:   whisperFullParamsSetSpeedUp,
+		cWhisperFullParamsSetDebugMode: whisperFullParamsSetDebugMode,
+		cWhisperFullParamsSetAudioCtx:  whisperFullParamsSetAudioCtx,
+
+		cWhisperFullParamsSetTdrzEnable: whisperFullParamsSetTdrzEnable,
+
+		cWhisperFullParamsSetInitialPrompt: whisperFullParamsSetInitialPrompt,
+		cWhisperFullParamsSetPromptTokens:  whisperFullParamsSetPromptTokens,
+		cWhisperFullParamsSetPromptNTokens: whisperFullParamsSetPromptNTokens,
+
+		cWhisperFullParamsSetLanguage:       whisperFullParamsSetLanguage,
+		cWhisperFullParamsSetDetectLanguage: whisperFullParamsSetDetectLanguage,
+
+		cWhisperFullParamsSetSuppressBlank:           whisperFullParamsSetSuppressBlank,
+		cWhisperFullParamsSetSuppressNonSpeechTokens: whisperFullParamsSetSuppressNonSpeechTokens,
+		cWhisperFullParamsSetTemperature:             whisperFullParamsSetTemperature,
+		cWhisperFullParamsSetMaxInitialTs:            whisperFullParamsSetMaxInitialTs,
+		cWhisperFullParamsSetLengthPenalty:           whisperFullParamsSetLengthPenalty,
+
+		cWhisperFullParamsSetTemperatureInc: whisperFullParamsSetTemperatureInc,
+		cWhisperFullParamsSetEntropyThold:   whisperFullParamsSetTemperatureInc,
+		cWhisperFullParamsSetLogprobThold:   whisperFullParamsSetLogprobThold,
+		cWhisperFullParamsSetNoSpeechThold:  whisperFullParamsSetNoSpeechThold,
+
+		cWhisperFullParamsSetGreedyBestOf:       whisperFullParamsSetGreedyBestOf,
+		cWhisperFullParamsSetBeamSearchBeamSize: whisperFullParamsSetBeamSearchBeamSize,
+		cWhisperFullParamsSetBeamSearchPatience: whisperFullParamsSetBeamSearchPatience,
+
+		whisperInitFromFileWithParamsRef:   whisperInitFromFileWithParamsRef,
+		whisperInitFromBufferWithParamsRef: whisperInitFromBufferWithParamsRef,
+
+		whisperInitFromFileWithParamsRefNoState:   whisperInitFromFileWithParamsRefNoState,
+		whisperInitFromBufferWithParamsRefNoState: whisperInitFromBufferWithParamsRefNoState,
+
+		cWhisperFullParamsFullRef:          whisperFullParamsFullRef,
+		cWhisperFullParamsFullRefWithState: whisperFullParamsFullRefWithState,
+		cWhisperFullParamsFullRefParallel:  whisperFullParamsFullRefParallel,
 	}, nil
 }
 
-func (c *CWhisperImpl) WhisperInitFromFileWithParams(pathModel string, params *WhisperContextParamsRef) *CWhisperContext {
-	ctx := c.cWhisperInitFromFileWithParams(pathModel, params.paramsRef)
-	if ctx != 0 {
-		return &CWhisperContext{ctx: ctx}
-	}
-	return nil
-}
-
-func (c *CWhisperImpl) WhisperInitFromBufferWithParams(buffer []byte, params *WhisperContextParamsRef) *CWhisperContext {
-	ctx := c.cWhisperInitFromBufferWithParams(uintptr(unsafe.Pointer(&buffer[0])), len(buffer), params.paramsRef)
-	return &CWhisperContext{ctx: ctx}
-}
-
-func (c *CWhisperImpl) WhisperInitFromFileWithParamsNoState(pathModel string, params *WhisperContextParamsRef) *CWhisperContext {
-	ctx := c.cWhisperInitFromFileWithParamsNoState(pathModel, params.paramsRef)
-	return &CWhisperContext{ctx: ctx}
-}
-
-func (c *CWhisperImpl) WhisperInitFromBufferWithParamsNoState(buffer []byte, params *WhisperContextParamsRef) *CWhisperContext {
-	ctx := c.cWhisperInitFromBufferWithParamsNoState(uintptr(unsafe.Pointer(&buffer[0])), len(buffer), params.paramsRef)
-	return &CWhisperContext{ctx: ctx}
-}
+//
+//func (c *CWhisperImpl) WhisperInitFromFileWithParams(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext {
+//	ctx := c.cWhisperInitFromFileWithParams(pathModel, params.paramsRef)
+//	if ctx != 0 {
+//		return &CWhisperContext{ctx: ctx}
+//	}
+//	return nil
+//}
+//
+//func (c *CWhisperImpl) WhisperInitFromBufferWithParams(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext {
+//	ctx := c.cWhisperInitFromBufferWithParams(uintptr(unsafe.Pointer(&buffer[0])), len(buffer), params.paramsRef)
+//	return &CWhisperContext{ctx: ctx}
+//}
+//
+//func (c *CWhisperImpl) WhisperInitFromFileWithParamsNoState(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext {
+//	ctx := c.cWhisperInitFromFileWithParamsNoState(pathModel, params.paramsRef)
+//	return &CWhisperContext{ctx: ctx}
+//}
+//
+//func (c *CWhisperImpl) WhisperInitFromBufferWithParamsNoState(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext {
+//	ctx := c.cWhisperInitFromBufferWithParamsNoState(uintptr(unsafe.Pointer(&buffer[0])), len(buffer), params.paramsRef)
+//	return &CWhisperContext{ctx: ctx}
+//}
 
 func (c *CWhisperImpl) WhisperInitState(ctx *CWhisperContext) *CWhisperState {
 	state := c.cWhisperInitState(ctx.ctx)
@@ -1085,7 +1482,7 @@ func (c *CWhisperImpl) WhisperFreeParams(params *CWhisperFullParamsRef) {
 	params = nil
 }
 
-func (c *CWhisperImpl) WhisperFreeContextParams(params *WhisperContextParamsRef) {
+func (c *CWhisperImpl) WhisperFreeContextParams(params *CWhisperContextParamsRef) {
 	c.cWhisperFreeContextParams(params.paramsRef)
 	if params.paramsRef != 0 {
 		params.paramsRef = 0
@@ -1384,46 +1781,47 @@ func (c *CWhisperImpl) WhisperPrintSystemInfo() string {
 	return result
 }
 
-func (c *CWhisperImpl) WhisperContextDefaultParamsByRef() *WhisperContextParamsRef {
+func (c *CWhisperImpl) WhisperContextDefaultParamsByRef() *CWhisperContextParamsRef {
 	paramsRef := c.cWhisperContextDefaultParamsByRef()
-	return &WhisperContextParamsRef{
+	return &CWhisperContextParamsRef{
 		paramsRef: paramsRef,
 	}
 }
 
-func (c *CWhisperImpl) WhisperContextDefaultParams() *CWhisperContextParams {
-	params := c.cWhisperContextDefaultParams()
-	return (*CWhisperContextParams)(unsafe.Pointer(params))
-}
+//func (c *CWhisperImpl) WhisperContextDefaultParams() *WhisperContextParams {
+//	params := c.cWhisperContextDefaultParams()
+//	return (*WhisperContextParams)(unsafe.Pointer(params))
+//}
 
 func (c *CWhisperImpl) WhisperFullDefaultParamsByRef(strategy WhisperSamplingStrategy) *CWhisperFullParamsRef {
-	//i := int32(strategy)
-	//paramsRef := c.cWhisperFullDefaultParamsByRef(uintptr(unsafe.Pointer(&i)))
+	i := int(strategy)
+	paramsRef := c.cWhisperFullDefaultParamsByRef(i)
 	return &CWhisperFullParamsRef{
-		paramsRef: 0,
+		paramsRef: paramsRef,
 	}
 }
 
-func (c *CWhisperImpl) WhisperFullDefaultParams(strategy WhisperSamplingStrategy) *CWhisperFullParams {
-	//i := int32(strategy)
-	//params := c.cWhisperFullDefaultParams(uintptr(unsafe.Pointer(&i)))
-	return &CWhisperFullParams{}
-}
+//
+//func (c *CWhisperImpl) WhisperFullDefaultParams(strategy WhisperSamplingStrategy) *CWhisperFullParams {
+//	//i := int32(strategy)
+//	//params := c.cWhisperFullDefaultParams(uintptr(unsafe.Pointer(&i)))
+//	return &CWhisperFullParams{}
+//}
 
-func (c *CWhisperImpl) WhisperFull(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int) int {
-	result := c.cWhisperFull(ctx.ctx, params.paramsRef, &samples[0], nSamples)
-	return result
-}
-
-func (c *CWhisperImpl) WhisperFullWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []float32, nSamples int) int {
-	result := c.cWhisperFullWithState(ctx.ctx, state.state, params.paramsRef, &samples[0], nSamples)
-	return result
-}
-
-func (c *CWhisperImpl) WhisperFullParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples, nProcessors int) int {
-	result := c.cWhisperFullParallel(ctx.ctx, params.paramsRef, &samples[0], nSamples, nProcessors)
-	return result
-}
+//func (c *CWhisperImpl) WhisperFull(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int) int {
+//	result := c.cWhisperFull(ctx.ctx, params.paramsRef, &samples[0], nSamples)
+//	return result
+//}
+//
+//func (c *CWhisperImpl) WhisperFullWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []float32, nSamples int) int {
+//	result := c.cWhisperFullWithState(ctx.ctx, state.state, params.paramsRef, &samples[0], nSamples)
+//	return result
+//}
+//
+//func (c *CWhisperImpl) WhisperFullParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples, nProcessors int) int {
+//	result := c.cWhisperFullParallel(ctx.ctx, params.paramsRef, &samples[0], nSamples, nProcessors)
+//	return result
+//}
 
 func (c *CWhisperImpl) WhisperFullNSegments(ctx *CWhisperContext) int {
 	result := c.cWhisperFullNSegments(ctx.ctx)
@@ -1515,13 +1913,13 @@ func (c *CWhisperImpl) WhisperFullGetTokenIdFromState(state *CWhisperState, iSeg
 	return WhisperToken(result)
 }
 
-func (c *CWhisperImpl) WhisperFullGetTokenData(ctx *CWhisperContext, iSegment, iToken int) CWhisperTokenData {
-	panic("WhisperFullGetTokenData is not support now")
-}
-
-func (c *CWhisperImpl) WhisperFullGetTokenDataFromState(state *CWhisperState, iSegment, iToken int) CWhisperTokenData {
-	panic("WhisperFullGetTokenDataFromState is not support now")
-}
+//func (c *CWhisperImpl) WhisperFullGetTokenData(ctx *CWhisperContext, iSegment, iToken int) CWhisperTokenData {
+//	panic("WhisperFullGetTokenData is not support now")
+//}
+//
+//func (c *CWhisperImpl) WhisperFullGetTokenDataFromState(state *CWhisperState, iSegment, iToken int) CWhisperTokenData {
+//	panic("WhisperFullGetTokenDataFromState is not support now")
+//}
 
 func (c *CWhisperImpl) WhisperFullGetTokenP(ctx *CWhisperContext, iSegment, iToken int) float32 {
 	result := c.cWhisperFullGetTokenP(ctx.ctx, iSegment, iToken)
@@ -1531,4 +1929,202 @@ func (c *CWhisperImpl) WhisperFullGetTokenP(ctx *CWhisperContext, iSegment, iTok
 func (c *CWhisperImpl) WhisperFullGetTokenPFromState(state *CWhisperState, iSegment, iToken int) float32 {
 	result := c.cWhisperFullGetTokenPFromState(state.state, iSegment, iToken)
 	return result
+}
+
+//=============================================whisper_abi.h========================================================
+
+func (c *CWhisperImpl) WhisperContextParamsSetUseGpu(ctx *CWhisperContext, useGPU bool) {
+	c.cWhisperContextParamsSetUseGpu(ctx.ctx, useGPU)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetStrategy(ctx *CWhisperFullParamsRef, strategy string) {
+	c.cWhisperFullParamsSetStrategy(ctx.paramsRef, strategy)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetNThreads(ctx *CWhisperFullParamsRef, nThreads int) {
+	c.cWhisperFullParamsSetNThreads(ctx.paramsRef, nThreads)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetNMaxTextCtx(ctx *CWhisperFullParamsRef, nMaxTextCtx int) {
+	c.cWhisperFullParamsSetNMaxTextCtx(ctx.paramsRef, nMaxTextCtx)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetOffsetMs(ctx *CWhisperFullParamsRef, offsetMs int) {
+	c.cWhisperFullParamsSetOffsetMs(ctx.paramsRef, offsetMs)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetDurationMs(ctx *CWhisperFullParamsRef, durationMs int) {
+	c.cWhisperFullParamsSetDurationMs(ctx.paramsRef, durationMs)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetTranslate(ctx *CWhisperFullParamsRef, translate bool) {
+	c.cWhisperFullParamsSetTranslate(ctx.paramsRef, translate)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetNoContext(ctx *CWhisperFullParamsRef, noContext bool) {
+	c.cWhisperFullParamsSetNoContext(ctx.paramsRef, noContext)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetNoTimestamps(ctx *CWhisperFullParamsRef, noTimestamps bool) {
+	c.cWhisperFullParamsSetNoTimestamps(ctx.paramsRef, noTimestamps)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetSingleSegment(ctx *CWhisperFullParamsRef, singleSegment bool) {
+	c.cWhisperFullParamsSetSingleSegment(ctx.paramsRef, singleSegment)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetPrintSpecial(ctx *CWhisperFullParamsRef, printSpecial bool) {
+	c.cWhisperFullParamsSetPrintSpecial(ctx.paramsRef, printSpecial)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetPrintProgress(ctx *CWhisperFullParamsRef, printProgress bool) {
+	c.cWhisperFullParamsSetPrintProgress(ctx.paramsRef, printProgress)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetPrintRealtime(ctx *CWhisperFullParamsRef, printRealtime bool) {
+	c.cWhisperFullParamsSetPrintRealtime(ctx.paramsRef, printRealtime)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetPrintTimestamps(ctx *CWhisperFullParamsRef, printTimestamps bool) {
+	c.cWhisperFullParamsSetPrintTimestamps(ctx.paramsRef, printTimestamps)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetTokenTimestamps(ctx *CWhisperFullParamsRef, tokenTimestamps bool) {
+	c.cWhisperFullParamsSetTokenTimestamps(ctx.paramsRef, tokenTimestamps)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetTholdPt(ctx *CWhisperFullParamsRef, tholdPt float32) {
+	c.cWhisperFullParamsSetTholdPt(ctx.paramsRef, tholdPt)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetTholdPtsum(ctx *CWhisperFullParamsRef, tholdPtsum float32) {
+	c.cWhisperFullParamsSetTholdPtsum(ctx.paramsRef, tholdPtsum)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetMaxLen(ctx *CWhisperFullParamsRef, maxLen int) {
+	c.cWhisperFullParamsSetMaxLen(ctx.paramsRef, maxLen)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetSplitOnWord(ctx *CWhisperFullParamsRef, splitOnWord bool) {
+	c.cWhisperFullParamsSetSplitOnWord(ctx.paramsRef, splitOnWord)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetMaxTokens(ctx *CWhisperFullParamsRef, maxTokens int) {
+	c.cWhisperFullParamsSetMaxTokens(ctx.paramsRef, maxTokens)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetSpeedUp(ctx *CWhisperFullParamsRef, speedUp bool) {
+	c.cWhisperFullParamsSetSpeedUp(ctx.paramsRef, speedUp)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetDebugMode(ctx *CWhisperFullParamsRef, debugMode bool) {
+	c.cWhisperFullParamsSetDebugMode(ctx.paramsRef, debugMode)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetAudioCtx(ctx *CWhisperFullParamsRef, audioCtx int) {
+	c.cWhisperFullParamsSetAudioCtx(ctx.paramsRef, audioCtx)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetTdrzEnable(ctx *CWhisperFullParamsRef, tdrzEnable bool) {
+	c.cWhisperFullParamsSetTdrzEnable(ctx.paramsRef, tdrzEnable)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetInitialPrompt(ctx *CWhisperFullParamsRef, initialPrompt string) {
+	c.cWhisperFullParamsSetInitialPrompt(ctx.paramsRef, initialPrompt)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetPromptTokens(ctx *CWhisperFullParamsRef, promptTokens []int32) {
+	c.cWhisperFullParamsSetPromptTokens(ctx.paramsRef, &promptTokens[0])
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetPromptNTokens(ctx *CWhisperFullParamsRef, promptNTokens int) {
+	c.cWhisperFullParamsSetPromptNTokens(ctx.paramsRef, promptNTokens)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetLanguage(ctx *CWhisperFullParamsRef, language string) {
+	c.cWhisperFullParamsSetLanguage(ctx.paramsRef, language)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetDetectLanguage(ctx *CWhisperFullParamsRef, detectLanguage bool) {
+	c.cWhisperFullParamsSetDetectLanguage(ctx.paramsRef, detectLanguage)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetSuppressBlank(ctx *CWhisperFullParamsRef, suppressBlank bool) {
+	c.cWhisperFullParamsSetSuppressBlank(ctx.paramsRef, suppressBlank)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetSuppressNonSpeechTokens(ctx *CWhisperFullParamsRef, suppressNonSpeechTokens bool) {
+	c.cWhisperFullParamsSetSuppressNonSpeechTokens(ctx.paramsRef, suppressNonSpeechTokens)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetTemperature(ctx *CWhisperFullParamsRef, temperature float32) {
+	c.cWhisperFullParamsSetTemperature(ctx.paramsRef, temperature)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetMaxInitialTs(ctx *CWhisperFullParamsRef, maxInitialTs float32) {
+	c.cWhisperFullParamsSetMaxInitialTs(ctx.paramsRef, maxInitialTs)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetLengthPenalty(ctx *CWhisperFullParamsRef, lengthPenalty float32) {
+	c.cWhisperFullParamsSetLengthPenalty(ctx.paramsRef, lengthPenalty)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetTemperatureInc(ctx *CWhisperFullParamsRef, temperatureInc float32) {
+	c.cWhisperFullParamsSetTemperatureInc(ctx.paramsRef, temperatureInc)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetEntropyThold(ctx *CWhisperFullParamsRef, entropyThold float32) {
+	c.cWhisperFullParamsSetEntropyThold(ctx.paramsRef, entropyThold)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetLogprobThold(ctx *CWhisperFullParamsRef, logprobThold float32) {
+	c.cWhisperFullParamsSetLogprobThold(ctx.paramsRef, logprobThold)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetNoSpeechThold(ctx *CWhisperFullParamsRef, noSpeechThold float32) {
+	c.cWhisperFullParamsSetNoSpeechThold(ctx.paramsRef, noSpeechThold)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetGreedyBestOf(ctx *CWhisperFullParamsRef, bestOf int) {
+	c.cWhisperFullParamsSetGreedyBestOf(ctx.paramsRef, bestOf)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetBeamSearchBeamSize(ctx *CWhisperFullParamsRef, beamSize int) {
+	c.cWhisperFullParamsSetBeamSearchBeamSize(ctx.paramsRef, beamSize)
+}
+
+func (c *CWhisperImpl) WhisperFullParamsSetBeamSearchPatience(ctx *CWhisperFullParamsRef, patience float32) {
+	c.cWhisperFullParamsSetBeamSearchPatience(ctx.paramsRef, patience)
+}
+
+func (c *CWhisperImpl) WhisperInitFromFileWithParamsRef(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext {
+	ctx := c.whisperInitFromFileWithParamsRef(pathModel, params.paramsRef)
+	return &CWhisperContext{ctx: ctx}
+}
+
+func (c *CWhisperImpl) WhisperInitFromBufferWithParamsRef(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext {
+	ctx := c.whisperInitFromBufferWithParamsRef(uintptr(unsafe.Pointer(&buffer[0])), int64(len(buffer)), params.paramsRef)
+	return &CWhisperContext{ctx: ctx}
+}
+
+func (c *CWhisperImpl) WhisperInitFromFileWithParamsRefNoState(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext {
+	ctx := c.whisperInitFromFileWithParamsRefNoState(pathModel, params.paramsRef)
+	return &CWhisperContext{ctx: ctx}
+}
+
+func (c *CWhisperImpl) WhisperInitFromBufferWithParamsRefNoState(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext {
+	ctx := c.whisperInitFromBufferWithParamsRefNoState(uintptr(unsafe.Pointer(&buffer[0])), int64(len(buffer)), params.paramsRef)
+	return &CWhisperContext{ctx: ctx}
+}
+
+func (c *CWhisperImpl) WhisperFullRef(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int) int {
+	return c.cWhisperFullParamsFullRef(ctx.ctx, params.paramsRef, uintptr(unsafe.Pointer(&samples[0])), nSamples)
+}
+
+func (c *CWhisperImpl) WhisperFullRefWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []float32, nSamples int) int {
+	return c.cWhisperFullParamsFullRefWithState(ctx.ctx, state.state, params.paramsRef, uintptr(unsafe.Pointer(&samples[0])), nSamples)
+}
+
+func (c *CWhisperImpl) WhisperFullRefParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int, nProcessors int) int {
+	return c.cWhisperFullParamsFullRefParallel(ctx.ctx, params.paramsRef, uintptr(unsafe.Pointer(&samples[0])), nSamples, nProcessors)
 }
