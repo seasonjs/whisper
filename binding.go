@@ -637,9 +637,9 @@ type CWhisper interface {
 	WhisperInitFromFileWithParamsRefNoState(pathModel string, params *CWhisperContextParamsRef) *CWhisperContext
 	WhisperInitFromBufferWithParamsRefNoState(buffer []byte, params *CWhisperContextParamsRef) *CWhisperContext
 
-	WhisperFullRef(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int) int
-	WhisperFullRefWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []float32, nSamples int) int
-	WhisperFullRefParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int, nProcessors int) int
+	WhisperFullRef(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []byte) int
+	WhisperFullRefWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []byte) int
+	WhisperFullRefParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []byte, nProcessors int) int
 }
 
 type CWhisperImpl struct {
@@ -833,9 +833,9 @@ type CWhisperImpl struct {
 	whisperInitFromFileWithParamsRefNoState   func(pathModel string, params uintptr) uintptr
 	whisperInitFromBufferWithParamsRefNoState func(buffer uintptr, bufferSize int64, params uintptr) uintptr
 
-	cWhisperFullParamsFullRef          func(ctx uintptr, params uintptr, samples uintptr, nSamples int) int
-	cWhisperFullParamsFullRefWithState func(ctx uintptr, state uintptr, params uintptr, samples uintptr, nSamples int) int
-	cWhisperFullParamsFullRefParallel  func(ctx uintptr, params uintptr, samples uintptr, nSamples int, nProcessors int) int
+	cWhisperFullParamsFullRef          func(ctx uintptr, params uintptr, samples *byte, nSamples int) int
+	cWhisperFullParamsFullRefWithState func(ctx uintptr, state uintptr, params uintptr, samples *byte, nSamples int) int
+	cWhisperFullParamsFullRefParallel  func(ctx uintptr, params uintptr, samples *byte, nSamples int, nProcessors int) int
 }
 
 func NewCWhisper(libraryPath string) (CWhisper, error) {
@@ -1033,9 +1033,9 @@ func NewCWhisper(libraryPath string) (CWhisper, error) {
 		whisperInitFromFileWithParamsRefNoState   func(pathModel string, params uintptr) uintptr
 		whisperInitFromBufferWithParamsRefNoState func(buffer uintptr, bufferSize int64, params uintptr) uintptr
 
-		whisperFullParamsFullRef          func(ctx uintptr, params uintptr, samples uintptr, nSamples int) int
-		whisperFullParamsFullRefWithState func(ctx uintptr, state uintptr, params uintptr, samples uintptr, nSamples int) int
-		whisperFullParamsFullRefParallel  func(ctx uintptr, params uintptr, samples uintptr, nSamples int, nProcessors int) int
+		whisperFullParamsFullRef          func(ctx uintptr, params uintptr, samples *byte, nSamples int) int
+		whisperFullParamsFullRefWithState func(ctx uintptr, state uintptr, params uintptr, samples *byte, nSamples int) int
+		whisperFullParamsFullRefParallel  func(ctx uintptr, params uintptr, samples *byte, nSamples int, nProcessors int) int
 	)
 
 	//=============================================whisper.h============================================================
@@ -2117,14 +2117,15 @@ func (c *CWhisperImpl) WhisperInitFromBufferWithParamsRefNoState(buffer []byte, 
 	return &CWhisperContext{ctx: ctx}
 }
 
-func (c *CWhisperImpl) WhisperFullRef(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int) int {
-	return c.cWhisperFullParamsFullRef(ctx.ctx, params.paramsRef, uintptr(unsafe.Pointer(&samples[0])), nSamples)
+func (c *CWhisperImpl) WhisperFullRef(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []byte) int {
+
+	return c.cWhisperFullParamsFullRef(ctx.ctx, params.paramsRef, &samples[0], len(samples))
 }
 
-func (c *CWhisperImpl) WhisperFullRefWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []float32, nSamples int) int {
-	return c.cWhisperFullParamsFullRefWithState(ctx.ctx, state.state, params.paramsRef, uintptr(unsafe.Pointer(&samples[0])), nSamples)
+func (c *CWhisperImpl) WhisperFullRefWithState(ctx *CWhisperContext, state *CWhisperState, params *CWhisperFullParamsRef, samples []byte) int {
+	return c.cWhisperFullParamsFullRefWithState(ctx.ctx, state.state, params.paramsRef, &samples[0], len(samples))
 }
 
-func (c *CWhisperImpl) WhisperFullRefParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []float32, nSamples int, nProcessors int) int {
-	return c.cWhisperFullParamsFullRefParallel(ctx.ctx, params.paramsRef, uintptr(unsafe.Pointer(&samples[0])), nSamples, nProcessors)
+func (c *CWhisperImpl) WhisperFullRefParallel(ctx *CWhisperContext, params *CWhisperFullParamsRef, samples []byte, nProcessors int) int {
+	return c.cWhisperFullParamsFullRefParallel(ctx.ctx, params.paramsRef, &samples[0], len(samples), nProcessors)
 }

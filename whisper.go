@@ -2,8 +2,6 @@ package whisper
 
 import (
 	"errors"
-	"fmt"
-	"github.com/go-audio/wav"
 	"io"
 )
 
@@ -20,7 +18,7 @@ type WhisperModel struct {
 	ctx        *CWhisperContext
 	options    *WhisperOptions
 	isAutoLoad bool
-	fullParams *CWhisperFullParamsRef
+	params     *CWhisperFullParamsRef
 }
 
 func NewWhisperModel(dylibPath string, options WhisperOptions) (*WhisperModel, error) {
@@ -28,12 +26,16 @@ func NewWhisperModel(dylibPath string, options WhisperOptions) (*WhisperModel, e
 	if err != nil {
 		return nil, err
 	}
-	fullParams := cWhisper.WhisperFullDefaultParamsByRef(WHISPER_SAMPLING_GREEDY)
+	params := cWhisper.WhisperFullDefaultParamsByRef(WHISPER_SAMPLING_GREEDY)
+	//make sure NProcessors bigger than
+	if options.NProcessors < 1 {
+		options.NProcessors = 1
+	}
 	return &WhisperModel{
-		cWhisper:   cWhisper,
-		dylibPath:  dylibPath,
-		options:    &options,
-		fullParams: fullParams,
+		cWhisper:  cWhisper,
+		dylibPath: dylibPath,
+		options:   &options,
+		params:    params,
 	}, nil
 }
 
@@ -52,36 +54,18 @@ type WhisperState struct {
 	cState *CWhisperState
 }
 
-//func (m *WhisperModel) WhisperInitState() *WhisperState {
-//	state := m.cWhisper.WhisperInitState(m.ctx)
-//
-//	return &WhisperState{
-//		m:      m,
-//		cState: state,
-//	}
-//}
-
 func (m *WhisperModel) Predict(reader io.ReadSeeker) (string, error) {
 	if m.ctx == nil {
 		return "", errors.New("CWhisperContext is nil")
 	}
 
-	dec := wav.NewDecoder(reader)
-	buf, err := dec.FullPCMBuffer()
+	data, err := io.ReadAll(reader)
 	if err != nil {
 		return "", err
 	}
-	if int(dec.SampleRate) != WHISPER_SAMPLE_RATE {
-		return "", fmt.Errorf("unsupported sample rate: %d", dec.SampleRate)
-	}
-	if dec.NumChans != 1 {
-		return "", fmt.Errorf("unsupported number of channels: %d", dec.NumChans)
-	}
 
-	data := buf.AsFloat32Buffer().Data
-
-	if m.cWhisper.WhisperFullRefParallel(m.ctx, m.fullParams, data, len(data), m.options.NProcessors) != 0 {
-		return "", errors.New("WhisperFullParallel Error,failed to process audio")
+	if m.cWhisper.WhisperFullRefParallel(m.ctx, m.params, data, m.options.NProcessors) != 0 {
+		return "", errors.New("WhisperFullParallel Error, failed to process audio")
 	}
 
 	result := ""
